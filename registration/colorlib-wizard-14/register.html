@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="colorlib.com" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign Up Form</title>
+   
+    <!-- Font Icon -->
+    <link
+      rel="stylesheet"
+      href="fonts/material-icon/css/material-design-iconic-font.min.css"
+    />
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <h2>RSBSA REGISTRATION</h2>
+        <form
+          method="POST"
+          id="signup-form"
+          class="signup-form"
+          enctype="multipart/form-data"
+        >
+          <h3>STEP 1</h3>
+          <fieldset>
+            <h4>Personal Profile</h4>
+            <div class="form-row">
+              <div class="form-file">
+                <input
+                  type="file"
+                  class="inputfile"
+                  name="your_picture"
+                  id="your_picture"
+                  onchange="readURL(this);"
+                  data-multiple-caption="{count} files selected"
+                  multiple
+                />
+                <label for="your_picture">
+                  <figure>
+                    <img
+                      src="images/your-picture.png"
+                      alt=""
+                      class="your_picture_image"
+                    />
+                  </figure>
+                  <span class="file-button">choose picture</span>
+                </label>
+              </div>
+              <div class="form-group-flex">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="first_name"
+                    id="first_name"
+                    placeholder="First Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="middle_name"
+                    id="middle_name"
+                    placeholder="Middle Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="sur_name"
+                    id="sur_name"
+                    placeholder="Surname"
+                  />
+                  <hr />
+                  <div
+                    class="form-row"
+                    style="display: flex; align-items: center"
+                  >
+                    <div
+                      class="form-holder"
+                      style="display: flex; align-items: center"
+                    >
+                      <p style="color: black"><strong>SEX:</strong></p>
+                      <label
+                        style="
+                          display: flex;
+                          align-items: start;
+                          margin: 20px 20px 20px 20px;
+                        "
+                      >
+                        <input type="radio" name="sex" value="male" />
+                        Male
+                      </label>
+
+                      <label style="display: flex; align-items: start">
+                        <input type="radio" name="sex" value="female" />
+                        Female
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h4>Address</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <select name="region" id="region">
+                  <option value="">REGION</option>
+                  <option value="Viet Nam">Viet Nam</option>
+                  <option value="USA">USA</option>
+                </select>
+                <span class="select-icon"
+                  ><i class="zmdi zmdi-caret-down"></i
+                ></span>
+              </div>
+
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="province"
+                  id="province"
+                  placeholder="PROVINCE"
+                />
+              </div>
+
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  placeholder="MUNICIPALITY/CITY"
+                />
+              </div>
+            </div>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="barangay"
+                  id="barangay"
+                  placeholder="BARANGAY"
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="street_number"
+                  id="street_number"
+                  placeholder="STREET/SITIO/SUBDV."
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="purok"
+                  id="purok"
+                  placeholder="HOUSE/LOT/BLDG. NO./PUROK"
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <h3>STEP 2</h3>
+          <fieldset>
+            <h4>Contact</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="number"
+                  name="number"
+                  id="number"
+                  placeholder="MOBILE NUMBER"
+                />
+              </div>
+
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="lnumber"
+                  id="lnumber"
+                  placeholder="LANDLINE NUMBER"
+                />
+              </div>
+            </div>
+            <hr />
+            <h4>Person to Contact in case of emergency</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="number"
+                  name="emergencyNumber"
+                  id="emergencyNumber"
+                  placeholder="MOBILE NUMBER"
+                />
+              </div>
+            </div>
+            <hr />
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <h4>DATE OF BIRTH</h4>
+                <input
+                  type="date"
+                  name="dateOfBirth"
+                  id="dateOfBirth"
+                  placeholder="DATE OF BIRTH"
+                />
+              </div>
+            </div>
+            <hr />
+            <h4>PLACE OF BIRTH:</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="birthMunicipaltiy"
+                  id="birthMunicipaltiy"
+                  placeholder="MUNICIPALITY"
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="birthProvince"
+                  id="birthProvince"
+                  placeholder="PROVINCE/STATE"
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="purok"
+                  id="purok"
+                  placeholder="HOUSE/LOT/BLDG. NO./PUROK"
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <h3>STEP 3</h3>
+          <fieldset>
+            <div
+              class="form-row form-input-flex"
+              style="display: flex; align-items: center"
+            >
+              <div class="form-input" style="width: 100%">
+                <h4>HIGHEST LEVEL OF EDUCATION</h4>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 15px;
+                  "
+                >
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="PRE-SCHOOL"
+                      style="margin-right: 10px"
+                    />
+                    <span>PRE-SCHOOL</span>
+                  </label>
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="ELEMENTARY"
+                      style="margin-right: 10px"
+                    />
+                    <span>ELEMENTARY</span>
+                  </label>
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="HIGH SCHOOL (non K-12)"
+                      style="margin-right: 10px"
+                    />
+                    <span>HIGH SCHOOL (non K - 12)</span>
+                  </label>
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="JUNIOR HIGH SCHOOL (K -12)"
+                      style="margin-right: 10px"
+                    />
+                    <span>JUNIOR HIGH SCHOOL (K - 12)</span>
+                  </label>
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="SENIOR HIGH SCHOOL (K -12)"
+                      style="margin-right: 10px"
+                    />
+                    <span>SENIOR HIGH SCHOOL (K - 12)</span>
+                  </label>
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="COLLEGE"
+                      style="margin-right: 10px"
+                    />
+                    <span>COLLEGE</span>
+                  </label>
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="VOCATIONAL"
+                      style="margin-right: 10px"
+                    />
+                    <span>VOCATIONAL</span>
+                  </label>
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="POST-GRADUATE"
+                      style="margin-right: 10px"
+                    />
+                    <span>POST-GRADUATE</span>
+                  </label>
+                  <label
+                    style="display: flex; align-items: center; width: 100%"
+                  >
+                    <input
+                      type="radio"
+                      name="educationLevel"
+                      value="NONE"
+                      style="margin-right: 10px"
+                    />
+                    <span>NONE</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <h4>Religion</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div class="form-input" style="display: flex; gap: 20px">
+                <label style="display: flex; align-items: center">
+                  <input type="radio" name="religion" value="Christianity" />
+                  Christianity
+                </label>
+                <label style="display: flex; align-items: center">
+                  <input type="radio" name="religion" value="Islam" />
+                  Islam
+                </label>
+              </div>
+            </div>
+
+            <h4>Other</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="religion"
+                  id="religion"
+                  placeholder="OTHERS"
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <h3>STEP 4</h3>
+          <fieldset>
+            <h4>Civil Status</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div class="form-input" style="display: flex; gap: 20px">
+                <label style="display: flex; align-items: center">
+                  <input type="radio" name="civilstatus" value="single" />
+                  Single
+                </label>
+                <label style="display: flex; align-items: center">
+                  <input type="radio" name="civilstatus" value="widowed" />
+                  Widowed
+                </label>
+                <label style="display: flex; align-items: center">
+                  <input type="radio" name="civilstatus" value="separated" />
+                  Separated
+                </label>
+              </div>
+            </div>
+            <hr />
+
+            <h4>Married</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="text"
+                  name="civilstatus"
+                  id="civilstatus"
+                  placeholder="Name Of Spouse"
+                />
+              </label>
+            </div>
+            <hr />
+
+            <h4>Mother's Maiden Name</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="text"
+                  name="mMaidenName"
+                  id="mMaidenName"
+                  placeholder="Mother's Maiden Name"
+                />
+              </label>
+            </div>
+            <hr />
+            <div class="form-row" style="margin-top: 20px; margin-bottom: 20px">
+              <label><strong>Person with Disability (PWD):</strong></label>
+              <label style="display: flex; align-items: start">
+                <input type="radio" name="pwd" value="yes" /> Yes
+              </label>
+              <label style="display: flex; align-items: start">
+                <input type="radio" name="pwd" value="no" /> No
+              </label>
+            </div>
+            <hr />
+            <div class="form-row" style="margin-top: 20px; margin-bottom: 20px">
+              <label><strong>4P's Beneficiary?</strong></label>
+              <label style="display: flex; align-items: start">
+                <input type="radio" name="4ps" value="yes" /> Yes
+              </label>
+              <label style="display: flex; align-items: start">
+                <input type="radio" name="4ps" value="no" /> No
+              </label>
+            </div>
+          </fieldset>
+
+          <h3>STEP 5</h3>
+
+          <fieldset>
+            <div class="form-row">
+              <label><strong>Member of an Indigenous Group?</strong></label>
+              <label style="display: flex; align-items: start">
+                <input
+                  type="radio"
+                  name="indigenous"
+                  value="yes"
+                  onchange="toggleIndigenousInput(true)"
+                />
+                Yes
+              </label>
+              <label style="display: flex; align-items: start">
+                <input
+                  type="radio"
+                  name="indigenous"
+                  value="no"
+                  onchange="toggleIndigenousInput(false)"
+                />
+                No
+              </label>
+            </div>
+            <div class="form-group">
+              <div
+                id="indigenousDetails"
+                style="display: none; margin-top: 20px"
+              >
+                <label><strong>If yes, specify:</strong></label>
+                <input
+                  type="text"
+                  name="indigenous_details"
+                  placeholder="Specify group"
+                  style="margin-top: 20px"
+                />
+              </div>
+            </div>
+            <hr />
+            <div class="form-row">
+              <label><strong>With Government ID?</strong></label>
+              <label style="display: flex; align-items: start">
+                <input
+                  type="radio"
+                  name="gov_id"
+                  value="yes"
+                  onclick="toggleIdFields(true)"
+                />
+                Yes
+              </label>
+              <label style="display: flex; align-items: start">
+                <input
+                  type="radio"
+                  name="gov_id"
+                  value="no"
+                  onclick="toggleIdFields(false)"
+                />
+                No
+              </label>
+            </div>
+            <div id="idFields" style="display: none; margin-top: 20px">
+              <div class="form-group">
+                <label style="margin-bottom: 20px"
+                  >If yes, specify ID Type:</label
+                >
+                <select name="id_type">
+                  <option value="" disabled selected>Select ID Type</option>
+                  <option value="passport">Passport</option>
+                  <option value="driver_license">Driver's License</option>
+                  <option value="national_id">National ID</option>
+                  <option value="voter_id">Voter's ID</option>
+                  <option value="social_security">Social Security ID</option>
+                  <option value="philhealth_id">PhilHealth ID</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label style="margin-bottom: 20px">ID Number:</label>
+                <input type="number" name="id_number" placeholder="ID Number" />
+              </div>
+            </div>
+            <hr />
+            <div class="form-row">
+              <label
+                ><strong
+                  >Member of any Farmers Association/Cooperative?</strong
+                ></label
+              >
+              <label style="display: flex; align-items: start">
+                <input
+                  type="radio"
+                  name="farmer_association"
+                  value="yes"
+                  onchange="toggleFarmerAssociationInput(true)"
+                />
+                Yes
+              </label>
+              <label style="display: flex; align-items: start">
+                <input
+                  type="radio"
+                  name="farmer_association"
+                  value="no"
+                  onchange="toggleFarmerAssociationInput(false)"
+                />
+                No
+              </label>
+            </div>
+            <div class="form-group">
+              <div id="farmerAssociationDetails" style="display: none">
+                <label style="margin-top: 20px; margin-bottom: 20px"
+                  >If yes, specify:</label
+                >
+                <input
+                  type="text"
+                  name="farmer_association_details"
+                  placeholder="Specify association"
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <h3>STEP 6</h3>
+          <fieldset>
+            <h4>House hold head</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <div class="form-input" style="display: flex; gap: 20px">
+                <label style="display: flex; align-items: center">
+                  <input type="radio" name="householdHead" value="yes" />
+                  yes
+                </label>
+                <label style="display: flex; align-items: center">
+                  <input type="radio" name="householdHead" value="no" />
+                  no
+                </label>
+              </div>
+            </div>
+            <hr />
+
+            <h4>If no, name of household head</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="text"
+                  name="householdHeadName"
+                  id="householdHeadName"
+                  placeholder="householdHeadName"
+                />
+              </label>
+            </div>
+            <hr />
+
+            <h4>Relationship</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="text"
+                  name="relationship"
+                  id="relationship"
+                  placeholder="Relationship"
+                />
+              </label>
+            </div>
+            <hr />
+            <h4>No. of lving household members</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="text"
+                  name="noHousehold"
+                  id="noHousehold"
+                  placeholder="Number of Household"
+                />
+              </label>
+            </div>
+
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 20px 10px 0 0;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="number"
+                  name="noMale"
+                  id="noMale"
+                  placeholder="Number of Male:"
+                />
+              </label>
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="number"
+                  name="nofemale"
+                  id="nofemale"
+                  placeholder="Number of Female"
+                />
+              </label>
+            </div>
+          </fieldset>
+
+          <h3>Account</h3>
+          <fieldset>
+            <div class="form-radio">
+              <label for="job" class="label-radio" style="margin-top: 200px"
+                >What are you doing?</label
+              >
+              <div class="form-flex">
+                <div class="form-radio">
+                  <input type="radio" name="job" value="farmer" id="farmer" />
+                  <label for="farmer">
+                    <figure>
+                      <img src="images/icon-1.png" alt="" />
+                    </figure>
+                    <span>Farmer</span>
+                  </label>
+                </div>
+
+                <div class="form-radio">
+                  <input
+                    type="radio"
+                    name="job"
+                    value="farmworker"
+                    id="farmworker"
+                    checked="checked"
+                  />
+                  <label for="farmworker">
+                    <figure>
+                      <img src="images/icon-2.png" alt="" />
+                    </figure>
+                    <span>FARMWORKER/LABORER</span>
+                  </label>
+                </div>
+
+                <div class="form-radio">
+                  <input
+                    type="radio"
+                    name="job"
+                    value="fisherfolk"
+                    id="fisherfolk"
+                  />
+                  <label for="fisherfolk">
+                    <figure>
+                      <img src="images/icon-3.png" alt="" />
+                    </figure>
+                    <span>FISHERFOLK</span>
+                  </label>
+                </div>
+
+                <div class="form-radio">
+                  <input
+                    type="radio"
+                    name="job"
+                    value="agri_youth"
+                    id="agri_youth"
+                  />
+                  <label for="agri_youth">
+                    <figure>
+                      <img src="images/icon-4.png" alt="" />
+                    </figure>
+                    <span>AGRI YOUTH</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <h3>Address</h3>
+          <fieldset>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="street_name"
+                  id="street_name"
+                  placeholder="Street Name"
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="street_number"
+                  id="street_number"
+                  placeholder="Street Number"
+                />
+              </div>
+            </div>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input type="text" name="city" id="city" placeholder="City" />
+              </div>
+              <div class="form-input">
+                <select name="country" id="country">
+                  <option value="">Country</option>
+                  <option value="Viet Nam">Viet Nam</option>
+                  <option value="USA">USA</option>
+                </select>
+                <span class="select-icon"
+                  ><i class="zmdi zmdi-caret-down"></i
+                ></span>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="vendor/jquery-steps/jquery.steps.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
