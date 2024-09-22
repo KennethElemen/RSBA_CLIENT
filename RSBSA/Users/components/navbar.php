@@ -2,7 +2,7 @@
   <ul class="app-menu list-unstyled accordion" id="menu-accordion">
     <li class="nav-item">
       <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-      <a class="nav-link active" href="../Admin/index.php">
+      <a class="nav-link active" href="../Users/index.php">
         <span class="nav-icon">
           <svg
             width="1em"
@@ -25,11 +25,10 @@
         <span class="nav-link-text">Dashboard</span> </a
       ><!--//nav-link-->
     </li>
-  
-    <!--//nav-item-->
+
     <li class="nav-item">
       <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-      <a class="nav-link" href="../admin/orders.php">
+      <a class="nav-link" href="../Users/orders.php">
         <span class="nav-icon">
           <svg
             width="1em"
@@ -57,11 +56,32 @@
     </li>
    
 
- 
+    <li class="nav-item">
+          <!-- Bootstrap Icons: https://icons.getbootstrap.com/ -->
+          <a class="nav-link" href="../Users/account.php">
+            <span class="nav-icon">
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 16 16"
+                class="bi bi-person"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-4.5 8a6.5 6.5 0 1 1 13 0h-13z"
+                />
+              </svg>
+            </span>
+            <span class="nav-link-text">Account</span>
+          </a>
+          <!--//nav-link-->
+        </li>
+    <!--//nav-item-->
     <!--//nav-item-->
     <li class="nav-item">
         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-        <a class="nav-link" href="settings.php">
+        <a class="nav-link" href="../Users/settings.php">
           <span class="nav-icon">
             <svg
               width="1em"
@@ -85,30 +105,6 @@
         ><!--//nav-link-->
       </li>
 
-
-              <li class="nav-item">
-          <!-- Bootstrap Icons: https://icons.getbootstrap.com/ -->
-          <a class="nav-link" href="../admin/account.php">
-            <span class="nav-icon">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-person"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-4.5 8a6.5 6.5 0 1 1 13 0h-13z"
-                />
-              </svg>
-            </span>
-            <span class="nav-link-text">Account</span>
-          </a>
-          <!--//nav-link-->
-        </li>
-
-   
            <!--//nav-item-->
            <li class="nav-item">
         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->

@@ -13,7 +13,7 @@
 			    <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
 				    <div class="inner">
 					    <div class="app-card-body p-3 p-lg-4">
-						    <h3 class="mb-3">Welcome, Admin!</h3>
+						    <h3 class="mb-3">Welcome, Staff</h3>
 						    <div class="row gx-5 gy-3">
 						        <div class="col-12 col-lg-9">
 							        
@@ -29,20 +29,10 @@
 				    </div><!--//inner-->
 			    </div><!--//app-card-->
 	
+	
 				    
 			    <div class="row g-4 mb-4">
 				    
-				    
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">TOTAL STAFF </h4>
-							    <div class="stats-figure">5</div>
-							    
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
@@ -54,10 +44,21 @@
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
 				    </div><!--//col-->
+					<div class="col-6 col-lg-3">
+					    <div class="app-card app-card-stat shadow-sm h-100">
+						    <div class="app-card-body p-3 p-lg-4">
+							    <h4 class="stats-type mb-1">TOTAL APPLICANTS</h4>
+							    <div class="stats-figure">23</div>
+							    <div class="stats-meta">
+								    Open</div>
+						    </div><!--//app-card-body-->
+						    <a class="app-card-link-mask" href="#"></a>
+					    </div><!--//app-card-->
+				    </div><!--//col-->
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">TOTAL REGISTER LAND</h4>
+							    <h4 class="stats-type mb-1">TOTAL REGISTERED LAND</h4>
 							    <div class="stats-figure">6</div>
 							    <div class="stats-meta">New</div>
 						    </div><!--//app-card-body-->
