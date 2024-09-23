@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html> 
+         <head> 
+         <title>Font Awesome 5 Icon</title> 
+         <meta name='viewport' content='width=device-width,intial-scale=1'> 
+         <script src='https://kit.fontawesome.com/a076d05399.js'></script> 
+         <!--Programmed by Dr.amold M. Fuentes--> 
+                           <script> weather = 
+                                 function(){
+                                 alert("Weather Proto!");
+                                 // document.write("<a href='https://www.accuweather.com/en/ph/poblacion-east/3407212/current-weather/3407212' target= '_parent>' + "click" "</a>"); 
+                                 document.getElementById('disp2').innerHTML="thanks";
+         
+                                 document.write("<h2>"+"BALOT WEATHER DATA APP " + "</h1>" + "<iframe src='https://www.accuweather.com/en/ph/poblacion-east/3407212/current-weather/3407212' style='height:2000px;width:2000px; color:rgb(85, 113, 83);' title='weather'›" + "«/iframe>");
+                                       }
+         </script> 
+         </head>
+         <body style="background-color: rgb(85, 113, 83);">
+            <p id="disp" style='font-size: 90px;color:rgb(230, 229, 163)'>Weather Data ni Fred the greate Mangbabalot</p>
+            <p id="disp2" style= 'font-size: 40px; color:rgb(230, 229, 163)'>fred the greate  Mangbabalot </p> 
+            <p  >Click Button to display weather</p> 
+            
+            <button style='font-size:20px;color:#557153' onclick="weather()">View🌧<i class='fas fa-Sun'></i></button>
+   
+   </body>
+</html>

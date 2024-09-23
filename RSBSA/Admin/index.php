@@ -8,8 +8,15 @@
 	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
-			    
+
+
 			    <h1 class="app-page-title">Overview</h1>
+				
+
+			
+					
+
+            
 			    <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
 				    <div class="inner">
 					    <div class="app-card-body p-3 p-lg-4">
@@ -20,7 +27,6 @@
 							        <div></div>
 							    </div><!--//col-->
 							    <div class="col-12 col-lg-3">
-								   
 							    </div><!--//col-->
 						    </div><!--//row-->
 						    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -28,11 +34,27 @@
 					    
 				    </div><!--//inner-->
 			    </div><!--//app-card-->
-	
+			
 				    
 			    <div class="row g-4 mb-4">
-				    
-				    
+					
+				<a class="weatherwidget-io" href="https://forecast7.com/en/15d32120d83/san-antonio/" data-label_1="SAN ANTONIO" data-label_2="WEATHER" data-theme="pure" >SAN ANTONIO WEATHER</a>
+									<script>
+									!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+									</script>
+				     <!-- Clock Section -->
+				
+					 <div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4 text-center">
+								<h4 class="app-card-title">Real-time Clock</h4>
+								<div class="stats-figure" id="clock" style="font-size: 30px; font-weight: bold; color: green;"></div>
+							</div><!--//app-card-body-->
+							<a class="app-card-link-mask" href="#"></a>
+						</div><!--//app-card-->
+					</div><!--//col-->
+
+
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
@@ -159,7 +181,20 @@
     </div><!--//app-wrapper-->    					
 
  
+	<script>
+    // Clock Script
+    function updateTime() {
+        const clockElement = document.getElementById('clock');
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        clockElement.innerText = timeString;
+    }
 
+    // Update the time every second
+    setInterval(updateTime, 1000);
+    updateTime(); // Initial call
+
+</script>
 	<?php include 'components/script.php'; ?>
 
 
