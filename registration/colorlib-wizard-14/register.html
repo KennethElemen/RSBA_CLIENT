@@ -110,32 +110,36 @@
             <div class="form-row form-input-flex">
               <div class="form-input">
                 <select name="region" id="region">
-                  <option value="">REGION</option>
+                  <option value="">
+                    REGION
+                  </option>
                 </select>
-                <span class="select-icon"
-                  ><i class="zmdi zmdi-caret-down"></i
-                ></span>
+                <span class="select-icon"><i class="zmdi zmdi-caret-down"></i></span>
               </div>
-
+  
               <div class="form-input">
                 <select name="province" id="province">
-                  <option value="">PROVINCE</option>
+                  <option value="">
+                    PROVINCE
+                  </option>
                 </select>
-                <span class="select-icon"
-                  ><i class="zmdi zmdi-caret-down"></i
-                ></span>
+                <span class="select-icon"><i class="zmdi zmdi-caret-down"></i></span>
               </div>
-
+  
               <div class="form-input">
                 <select name="city" id="city">
-                  <option value="">CITY/MUNICIPALITY</option>
+                  <option value="">
+                    CITY/MUNICIPALITY
+                  </option>
                 </select>
               </div>
             </div>
             <div class="form-row form-input-flex">
               <div class="form-input">
                 <select name="barangay" id="barangay">
-                  <option value="">BARANGAY</option>
+                  <option value="">
+                    BARANGAY
+                  </option>
                 </select>
               </div>
               <div class="form-input">
@@ -345,32 +349,26 @@
             <h4>Farm Address</h4>
             <div class="form-row form-input-flex">
               <div class="form-input">
-                <input
-                  type="text"
-                  name="province"
-                  id="province"
-                  placeholder="PROVINCE"
-                />
+                <select name="region" id="step4_region">
+                  <option value="">REGION</option>
+                </select>
               </div>
-
               <div class="form-input">
-                <input
-                  type="text"
-                  name="city"
-                  id="city"
-                  placeholder="MUNICIPALITY/CITY"
-                />
+                <select name="province" id="step4_province">
+                  <option value="">PROVINCE</option>
+                </select>
               </div>
-
             </div>
             <div class="form-row form-input-flex">
               <div class="form-input">
-                <input
-                  type="text"
-                  name="barangay"
-                  id="barangay"
-                  placeholder="BARANGAY"
-                />
+                <select name="city" id="step4_city">
+                  <option value="">CITY/MUNICIPALITY</option>
+                </select>
+              </div>
+              <div class="form-input">
+                <select name="barangay" id="step4_barangay">
+                  <option value="">BARANGAY</option>
+                </select>
               </div>
               
             </div>
@@ -451,150 +449,256 @@
     <script src="js/main.js"></script>
 
     <script>
-      const regionUrl = "https://psgc.cloud/api/regions";
-      const provinceSelect = document.getElementById("province");
-      const regionSelect = document.getElementById("region");
-      const citySelect = document.getElementById("city");
-      const subMunicipalitySelect = document.getElementById("sub_municipality");
-      const barangaySelect = document.getElementById("barangay");
+      document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll('.checkbox-wrapper input[type="checkbox"]');
+  
+        checkboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', function () {
+            const specifyInput = this.closest('.checkbox-wrapper').querySelector('.specify-input');
+            if (this.checked) {
+              specifyInput.style.display = 'block'; // Show input if checked
+            } else {
+              specifyInput.style.display = 'none'; // Hide input if unchecked
+            }
+          });
+        });
+      });
+    </script>
+  <script>
+    const regionUrl = 'https://psgc.cloud/api/regions';
+const provinceSelect = document.getElementById('province');
+const regionSelect = document.getElementById('region');
+const citySelect = document.getElementById('city');
+const barangaySelect = document.getElementById('barangay');
 
-      // Function to show loading indicator
-      function showLoadingIndicator() {
-        const loadingIndicator = document.createElement("div");
-        loadingIndicator.textContent = "Loading...";
-        loadingIndicator.id = "loadingIndicator";
-        document.body.appendChild(loadingIndicator);
-      }
+// Function to show loading indicator
+function showLoadingIndicator() {
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.textContent = 'Loading...';
+    loadingIndicator.id = 'loadingIndicator';
+    document.body.appendChild(loadingIndicator);
+}
 
-      // Function to hide loading indicator
-      function hideLoadingIndicator() {
-        const loadingIndicator = document.getElementById("loadingIndicator");
-        if (loadingIndicator) loadingIndicator.remove();
-      }
+// Function to hide loading indicator
+function hideLoadingIndicator() {
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    if (loadingIndicator) loadingIndicator.remove();
+}
 
-      // Fetch regions on page load
-      fetch(regionUrl)
-        .then((response) => {
-          showLoadingIndicator();
-          if (!response.ok)
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          return response.json();
-        })
-        .then((data) => {
-          hideLoadingIndicator();
-          data.forEach((region) => {
-            const option = document.createElement("option");
+// Fetch regions on page load
+fetch(regionUrl)
+    .then(response => {
+        showLoadingIndicator();
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        return response.json();
+    })
+    .then(data => {
+        hideLoadingIndicator();
+        data.forEach(region => {
+            const option = document.createElement('option');
             option.value = region.code;
             option.textContent = region.name;
             regionSelect.appendChild(option);
-          });
-        })
-        .catch((error) => {
-          hideLoadingIndicator();
-          console.error("Error fetching regions:", error);
         });
+    })
+    .catch(error => {
+        hideLoadingIndicator();
+        console.error('Error fetching regions:', error);
+    });
 
-      // Fetch provinces when a region is selected
-      regionSelect.addEventListener("change", function () {
-        const selectedRegion = this.value;
-        provinceSelect.innerHTML = '<option value="">PROVINCE</option>';
-        citySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
-        subMunicipalitySelect.innerHTML =
-          '<option value="">SUB-MUNICIPALITY</option>';
-        barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+// Fetch provinces when a region is selected
+regionSelect.addEventListener('change', function() {
+    const selectedRegion = this.value;
+    provinceSelect.innerHTML = '<option value="">PROVINCE</option>';
+    citySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
+    barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
 
-        if (selectedRegion) {
-          const provinceUrl = `https://psgc.cloud/api/regions/${selectedRegion}/provinces`;
+    if (selectedRegion) {
+        const provinceUrl = `https://psgc.cloud/api/regions/${selectedRegion}/provinces`;
 
-          fetch(provinceUrl)
-            .then((response) => {
-              if (!response.ok)
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              return response.json();
+        fetch(provinceUrl)
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
             })
-            .then((data) => {
-              data.forEach((province) => {
-                const option = document.createElement("option");
-                option.value = province.code;
-                option.textContent = province.name;
-                provinceSelect.appendChild(option);
-              });
+            .then(data => {
+                data.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.code;
+                    option.textContent = province.name;
+                    provinceSelect.appendChild(option);
+                });
             })
-            .catch((error) =>
-              console.error("Error fetching provinces:", error)
-            );
-        }
-      });
+            .catch(error => console.error('Error fetching provinces:', error));
+    }
+});
 
-      // Fetch cities and municipalities when a province is selected
-      provinceSelect.addEventListener("change", function () {
-        const selectedProvince = this.value;
-        citySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
-        subMunicipalitySelect.innerHTML =
-          '<option value="">SUB-MUNICIPALITY</option>';
-        barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+// Fetch cities and municipalities when a province is selected
+provinceSelect.addEventListener('change', function() {
+    const selectedProvince = this.value;
+    citySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
+    barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
 
-        if (selectedProvince) {
-          const citiesUrl = `https://psgc.cloud/api/provinces/${selectedProvince}/cities-municipalities`;
+    if (selectedProvince) {
+        const citiesUrl = `https://psgc.cloud/api/provinces/${selectedProvince}/cities-municipalities`;
 
-          fetch(citiesUrl)
-            .then((response) => {
-              if (!response.ok)
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              return response.json();
+        fetch(citiesUrl)
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
             })
-            .then((data) => {
-              data.forEach((city) => {
-                const option = document.createElement("option");
-                option.value = city.code;
-                option.textContent = city.name;
-                citySelect.appendChild(option);
-              });
+            .then(data => {
+                data.forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city.code;
+                    option.textContent = city.name;
+                    citySelect.appendChild(option);
+                });
 
-              if (data.length === 0) {
-                const option = document.createElement("option");
-                option.textContent = "No cities/municipalities available";
-                citySelect.appendChild(option);
-              }
+                if (data.length === 0) {
+                    const option = document.createElement('option');
+                    option.textContent = "No cities/municipalities available";
+                    citySelect.appendChild(option);
+                }
             })
-            .catch((error) => console.error("Error fetching cities:", error));
-        }
-      });
+            .catch(error => console.error('Error fetching cities:', error));
+    }
+});
 
-      // Fetch barangays when a city/municipality is selected
-      citySelect.addEventListener("change", function () {
-        const selectedCity = this.value;
-        barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+// Fetch barangays when a city/municipality is selected
+citySelect.addEventListener('change', function() {
+    const selectedCity = this.value;
+    barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
 
-        if (selectedCity) {
-          const barangayUrl = `https://psgc.cloud/api/cities-municipalities/${selectedCity}/barangays`;
+    if (selectedCity) {
+        const barangayUrl = `https://psgc.cloud/api/cities-municipalities/${selectedCity}/barangays`;
 
-          fetch(barangayUrl)
-            .then((response) => {
-              if (!response.ok)
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              return response.json();
+        fetch(barangayUrl)
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                return response.json();
             })
-            .then((data) => {
-              data.forEach((barangay) => {
-                const option = document.createElement("option");
-                option.value = barangay.code; // Assuming 'code' property exists for barangays
-                option.textContent = barangay.name; // Assuming 'name' property exists for barangays
-                barangaySelect.appendChild(option);
-              });
+            .then(data => {
+                data.forEach(barangay => {
+                    const option = document.createElement('option');
+                    option.value = barangay.code; // Assuming 'code' property exists for barangays
+                    option.textContent = barangay.name; // Assuming 'name' property exists for barangays
+                    barangaySelect.appendChild(option);
+                });
 
-              // If no barangays are found, display a message
-              if (data.length === 0) {
-                const option = document.createElement("option");
-                option.textContent = "No barangays available";
-                barangaySelect.appendChild(option);
-              }
+                // If no barangays are found, display a message
+                if (data.length === 0) {
+                    const option = document.createElement('option');
+                    option.textContent = "No barangays available";
+                    barangaySelect.appendChild(option);
+                }
             })
-            .catch((error) =>
-              console.error("Error fetching barangays:", error)
-            );
-        }
-      });
-    </script>
+            .catch(error => console.error('Error fetching barangays:', error));
+    }
+});
+
+  
+  </script>
+  <script>
+    const step4RegionSelect = document.getElementById('step4_region');
+const step4ProvinceSelect = document.getElementById('step4_province');
+const step4CitySelect = document.getElementById('step4_city');
+const step4BarangaySelect = document.getElementById('step4_barangay');
+
+// Fetch regions on page load
+fetch(regionUrl)
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    return response.json();
+  })
+  .then(data => {
+    data.forEach(region => {
+      const option = document.createElement('option');
+      option.value = region.code;
+      option.textContent = region.name;
+      step4RegionSelect.appendChild(option);
+    });
+  })
+  .catch(error => console.error('Error fetching regions:', error));
+
+// Fetch provinces when a region is selected
+step4RegionSelect.addEventListener('change', function() {
+  const selectedRegion = this.value;
+  step4ProvinceSelect.innerHTML = '<option value="">PROVINCE</option>';
+  step4CitySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
+  step4BarangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+
+  if (selectedRegion) {
+    const provinceUrl = `https://psgc.cloud/api/regions/${selectedRegion}/provinces`;
+
+    fetch(provinceUrl)
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        data.forEach(province => {
+          const option = document.createElement('option');
+          option.value = province.code;
+          option.textContent = province.name;
+          step4ProvinceSelect.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error fetching provinces:', error));
+  }
+});
+
+// Fetch cities when a province is selected
+step4ProvinceSelect.addEventListener('change', function() {
+  const selectedProvince = this.value;
+  step4CitySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
+  step4BarangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+
+  if (selectedProvince) {
+    const citiesUrl = `https://psgc.cloud/api/provinces/${selectedProvince}/cities-municipalities`;
+
+    fetch(citiesUrl)
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        data.forEach(city => {
+          const option = document.createElement('option');
+          option.value = city.code;
+          option.textContent = city.name;
+          step4CitySelect.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error fetching cities:', error));
+  }
+});
+
+// Fetch barangays when a city is selected
+step4CitySelect.addEventListener('change', function() {
+  const selectedCity = this.value;
+  step4BarangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+
+  if (selectedCity) {
+    const barangayUrl = `https://psgc.cloud/api/cities-municipalities/${selectedCity}/barangays`;
+
+    fetch(barangayUrl)
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        data.forEach(barangay => {
+          const option = document.createElement('option');
+          option.value = barangay.code; // Assuming 'code' property exists for barangays
+          option.textContent = barangay.name; // Assuming 'name' property exists for barangays
+          step4BarangaySelect.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error fetching barangays:', error));
+  }
+});
+
+  </script>
   </body>
 </html>
