@@ -1,614 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="colorlib.com" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign Up Form</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="colorlib.com" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Sign Up Form</title>
+    <!-- Font Icon -->
+    <link
+      rel="stylesheet"
+      href="fonts/material-icon/css/material-design-iconic-font.min.css"
+    />
 
-  <!-- Font Icon -->
-  <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css" />
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-  <!-- Main css -->
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<style>
-  .options {
-    display: none;
-    /* Hide options by default */
-  }
-</style>
-
-<body>
-  <div class="main">
-    <div class="container">
-      <h2>RSBSA REGISTRATION</h2>
-      <form method="POST" id="signup-form" class="signup-form" enctype="multipart/form-data">
-        <h3>STEP 1</h3>
-        <fieldset>
-          <h4>Personal Profile</h4>
-          <div class="form-row">
-            <div class="form-file">
-              <input type="file" class="inputfile" name="your_picture" id="your_picture" onchange="readURL(this);"
-                data-multiple-caption="{count} files selected" multiple />
-              <label for="your_picture">
-                <figure>
-                  <img src="images/your-picture.png" alt="" class="your_picture_image" />
-                </figure>
-                <span class="file-button">choose picture</span>
-              </label>
-            </div>
-            <div class="form-group-flex">
-              <div class="form-group">
-                <input type="text" name="first_name" id="first_name" placeholder="First Name" />
+  <body>
+    <div class="main">
+      <div class="container">
+        <h2>AGRILAND REGISTRATION FORM</h2>
+        <form
+          method="POST"
+          id="signup-form"
+          class="signup-form"
+          enctype="multipart/form-data"
+        >
+          <h3>STEP 1</h3>
+          <fieldset>
+            <h4>Personal Profile</h4>
+            <div class="form-row">
+              <div class="form-file">
+                <input
+                  type="file"
+                  class="inputfile"
+                  name="your_picture"
+                  id="your_picture"
+                  onchange="readURL(this);"
+                  data-multiple-caption="{count} files selected"
+                  multiple
+                />
+                <label for="your_picture">
+                  <figure>
+                    <img
+                      src="images/your-picture.png"
+                      alt=""
+                      class="your_picture_image"
+                    />
+                  </figure>
+                  <span class="file-button">choose picture</span>
+                </label>
               </div>
-              <div class="form-group">
-                <input type="text" name="middle_name" id="middle_name" placeholder="Middle Name" />
-              </div>
-              <div class="form-group">
-                <input type="text" name="sur_name" id="sur_name" placeholder="Surname" />
-                <hr />
-                <div class="form-row" style="display: flex; align-items: center">
-                  <div class="form-holder" style="display: flex; align-items: center">
-                    <p style="color: black"><strong>SEX:</strong></p>
-                    <label style="
+              <div class="form-group-flex">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="first_name"
+                    id="first_name"
+                    placeholder="First Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="middle_name"
+                    id="middle_name"
+                    placeholder="Middle Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="sur_name"
+                    id="sur_name"
+                    placeholder="Surname"
+                  />
+                  <hr />
+                  <div
+                    class="form-row"
+                    style="display: flex; align-items: center"
+                  >
+                    <div
+                      class="form-holder"
+                      style="display: flex; align-items: center"
+                    >
+                      <p style="color: black"><strong>SEX:</strong></p>
+                      <label
+                        style="
                           display: flex;
                           align-items: start;
                           margin: 20px 20px 20px 20px;
-                        ">
-                      <input type="radio" name="sex" value="male" />
-                      Male
-                    </label>
+                        "
+                      >
+                        <input type="radio" name="sex" value="male" />
+                        Male
+                      </label>
 
-                    <label style="display: flex; align-items: start">
-                      <input type="radio" name="sex" value="female" />
-                      Female
-                    </label>
+                      <label style="display: flex; align-items: start">
+                        <input type="radio" name="sex" value="female" />
+                        Female
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <h4>Address</h4>
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <select name="region" id="region">
-                <option value="">REGION</option>
-                <option value="Viet Nam">Viet Nam</option>
-                <option value="USA">USA</option>
-              </select>
-              <span class="select-icon"><i class="zmdi zmdi-caret-down"></i></span>
-            </div>
-
-            <div class="form-input">
-              <input type="text" name="province" id="province" placeholder="PROVINCE" />
-            </div>
-
-            <div class="form-input">
-              <input type="text" name="city" id="city" placeholder="MUNICIPALITY/CITY" />
-            </div>
-          </div>
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <input type="text" name="barangay" id="barangay" placeholder="BARANGAY" />
-            </div>
-            <div class="form-input">
-              <input type="text" name="street_number" id="street_number" placeholder="STREET/SITIO/SUBDV." />
-            </div>
-            <div class="form-input">
-              <input type="text" name="purok" id="purok" placeholder="HOUSE/LOT/BLDG. NO./PUROK" />
-            </div>
-          </div>
-        </fieldset>
-
-        <h3>STEP 2</h3>
-        <fieldset>
-          <h4>Contact</h4>
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <input type="number" name="number" id="number" placeholder="MOBILE NUMBER" />
-            </div>
-
-            <div class="form-input">
-              <input type="text" name="lnumber" id="lnumber" placeholder="LANDLINE NUMBER" />
-            </div>
-          </div>
-          <hr />
-          <h4>Person to Contact in case of emergency</h4>
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <input type="number" name="emergencyNumber" id="emergencyNumber" placeholder="MOBILE NUMBER" />
-            </div>
-          </div>
-          <hr />
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <h4>DATE OF BIRTH</h4>
-              <input type="date" name="dateOfBirth" id="dateOfBirth" placeholder="DATE OF BIRTH" />
-            </div>
-          </div>
-          <hr />
-          <h4>PLACE OF BIRTH:</h4>
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <input type="text" name="birthMunicipaltiy" id="birthMunicipaltiy" placeholder="MUNICIPALITY" />
-            </div>
-            <div class="form-input">
-              <input type="text" name="birthProvince" id="birthProvince" placeholder="PROVINCE/STATE" />
-            </div>
-            <div class="form-input">
-              <input type="text" name="purok" id="purok" placeholder="HOUSE/LOT/BLDG. NO./PUROK" />
-            </div>
-          </div>
-        </fieldset>
-
-        <h3>STEP 3</h3>
-        <fieldset>
-          <div class="form-row form-input-flex" style="display: flex; align-items: center">
-            <div class="form-input" style="width: 100%">
-              <h4>HIGHEST LEVEL OF EDUCATION</h4>
-              <div style="
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 15px;
-                  ">
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="PRE-SCHOOL" style="margin-right: 10px" />
-                  <span>PRE-SCHOOL</span>
-                </label>
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="ELEMENTARY" style="margin-right: 10px" />
-                  <span>ELEMENTARY</span>
-                </label>
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="HIGH SCHOOL (non K-12)" style="margin-right: 10px" />
-                  <span>HIGH SCHOOL (non K - 12)</span>
-                </label>
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="JUNIOR HIGH SCHOOL (K -12)"
-                    style="margin-right: 10px" />
-                  <span>JUNIOR HIGH SCHOOL (K - 12)</span>
-                </label>
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="SENIOR HIGH SCHOOL (K -12)"
-                    style="margin-right: 10px" />
-                  <span>SENIOR HIGH SCHOOL (K - 12)</span>
-                </label>
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="COLLEGE" style="margin-right: 10px" />
-                  <span>COLLEGE</span>
-                </label>
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="VOCATIONAL" style="margin-right: 10px" />
-                  <span>VOCATIONAL</span>
-                </label>
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="POST-GRADUATE" style="margin-right: 10px" />
-                  <span>POST-GRADUATE</span>
-                </label>
-                <label style="display: flex; align-items: center; width: 100%">
-                  <input type="radio" name="educationLevel" value="NONE" style="margin-right: 10px" />
-                  <span>NONE</span>
-                </label>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <h4>Religion</h4>
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-            <div class="form-input" style="display: flex; gap: 20px">
-              <label style="display: flex; align-items: center">
-                <input type="radio" name="religion" value="Christianity" />
-                Christianity
-              </label>
-              <label style="display: flex; align-items: center">
-                <input type="radio" name="religion" value="Islam" />
-                Islam
-              </label>
-            </div>
-          </div>
-
-          <h4>Other</h4>
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <input type="text" name="religion" id="religion" placeholder="OTHERS" />
-            </div>
-          </div>
-        </fieldset>
-
-        <h3>STEP 4</h3>
-        <fieldset>
-          <h4>Civil Status</h4>
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-            <div class="form-input" style="display: flex; gap: 20px">
-              <label style="display: flex; align-items: center">
-                <input type="radio" name="civilstatus" value="single" />
-                Single
-              </label>
-              <label style="display: flex; align-items: center">
-                <input type="radio" name="civilstatus" value="widowed" />
-                Widowed
-              </label>
-              <label style="display: flex; align-items: center">
-                <input type="radio" name="civilstatus" value="separated" />
-                Separated
-              </label>
-            </div>
-          </div>
-          <hr />
-
-          <h4>Married</h4>
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-            <label style="display: flex; align-items: center; gap: 10px">
-              <input type="text" name="civilstatus" id="civilstatus" placeholder="Name Of Spouse" />
-            </label>
-          </div>
-          <hr />
-
-          <h4>Mother's Maiden Name</h4>
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-            <label style="display: flex; align-items: center; gap: 10px">
-              <input type="text" name="mMaidenName" id="mMaidenName" placeholder="Mother's Maiden Name" />
-            </label>
-          </div>
-          <hr />
-          <div class="form-row" style="margin-top: 20px; margin-bottom: 20px">
-            <label><strong>Person with Disability (PWD):</strong></label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="pwd" value="yes" /> Yes
-            </label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="pwd" value="no" /> No
-            </label>
-          </div>
-          <hr />
-          <div class="form-row" style="margin-top: 20px; margin-bottom: 20px">
-            <label><strong>4P's Beneficiary?</strong></label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="4ps" value="yes" /> Yes
-            </label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="4ps" value="no" /> No
-            </label>
-          </div>
-        </fieldset>
-
-        <h3>STEP 5</h3>
-
-        <fieldset>
-          <div class="form-row">
-            <label><strong>Member of an Indigenous Group?</strong></label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="indigenous" value="yes" onchange="toggleIndigenousInput(true)" />
-              Yes
-            </label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="indigenous" value="no" onchange="toggleIndigenousInput(false)" />
-              No
-            </label>
-          </div>
-          <div class="form-group">
-            <div id="indigenousDetails" style="display: none; margin-top: 20px">
-              <label><strong>If yes, specify:</strong></label>
-              <input type="text" name="indigenous_details" placeholder="Specify group" style="margin-top: 20px" />
-            </div>
-          </div>
-          <hr />
-          <div class="form-row">
-            <label><strong>With Government ID?</strong></label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="gov_id" value="yes" onclick="toggleIdFields(true)" />
-              Yes
-            </label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="gov_id" value="no" onclick="toggleIdFields(false)" />
-              No
-            </label>
-          </div>
-          <div id="idFields" style="display: none; margin-top: 20px">
-            <div class="form-group">
-              <label style="margin-bottom: 20px">If yes, specify ID Type:</label>
-              <select name="id_type">
-                <option value="" disabled selected>Select ID Type</option>
-                <option value="passport">Passport</option>
-                <option value="driver_license">Driver's License</option>
-                <option value="national_id">National ID</option>
-                <option value="voter_id">Voter's ID</option>
-                <option value="social_security">Social Security ID</option>
-                <option value="philhealth_id">PhilHealth ID</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label style="margin-bottom: 20px">ID Number:</label>
-              <input type="number" name="id_number" placeholder="ID Number" />
-            </div>
-          </div>
-          <hr />
-          <div class="form-row">
-            <label><strong>Member of any Farmers Association/Cooperative?</strong></label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="farmer_association" value="yes" onchange="toggleFarmerAssociationInput(true)" />
-              Yes
-            </label>
-            <label style="display: flex; align-items: start">
-              <input type="radio" name="farmer_association" value="no" onchange="toggleFarmerAssociationInput(false)" />
-              No
-            </label>
-          </div>
-          <div class="form-group">
-            <div id="farmerAssociationDetails" style="display: none">
-              <label style="margin-top: 20px; margin-bottom: 20px">If yes, specify:</label>
-              <input type="text" name="farmer_association_details" placeholder="Specify association" />
-            </div>
-          </div>
-        </fieldset>
-
-        <h3>STEP 6</h3>
-        <fieldset>
-          <h4>House hold head</h4>
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-            <div class="form-input" style="display: flex; gap: 20px">
-              <label style="display: flex; align-items: center">
-                <input type="radio" name="householdHead" value="yes" />
-                yes
-              </label>
-              <label style="display: flex; align-items: center">
-                <input type="radio" name="householdHead" value="no" />
-                no
-              </label>
-            </div>
-          </div>
-          <hr />
-
-          <h4>If no, name of household head</h4>
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-            <label style="display: flex; align-items: center; gap: 10px">
-              <input type="text" name="householdHeadName" id="householdHeadName" placeholder="householdHeadName" />
-            </label>
-          </div>
-          <hr />
-
-          <h4>Relationship</h4>
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-            <label style="display: flex; align-items: center; gap: 10px">
-              <input type="text" name="relationship" id="relationship" placeholder="Relationship" />
-            </label>
-          </div>
-          <hr />
-          <h4>No. of lving household members</h4>
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              ">
-            <label style="display: flex; align-items: center; gap: 10px">
-              <input type="text" name="noHousehold" id="noHousehold" placeholder="Number of Household" />
-            </label>
-          </div>
-
-          <div class="form-row form-input-flex" style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 20px 10px 0 0;
-              ">
-            <label style="display: flex; align-items: center; gap: 10px">
-              <input type="number" name="noMale" id="noMale" placeholder="Number of Male:" />
-            </label>
-            <label style="display: flex; align-items: center; gap: 10px">
-              <input type="number" name="nofemale" id="nofemale" placeholder="Number of Female" />
-            </label>
-          </div>
-        </fieldset>
-
-        <h3>Account</h3>
-        <fieldset>
-          <div class="form-radio">
-            <label for="job" class="label-radio" style="margin-top: 20px">What are you doing?</label>
-            <div class="form-flex">
-              <div class="form-radio">
-                <input type="radio" name="job" value="farmer" id="farmer" checked="checked" onchange="showOptions()" />
-                <label for="farmer">
-                  <figure>
-                    <img src="images/icon-1.png" alt="Farmer" />
-                  </figure>
-                  <span>Farmer</span>
-                </label>
+            <h4>Home Address</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <select name="region" id="region">
+                  <option value="">REGION</option>
+                </select>
+                <span class="select-icon"
+                  ><i class="zmdi zmdi-caret-down"></i
+                ></span>
               </div>
 
-              <div class="form-radio">
-                <input type="radio" name="job" value="farmworker" id="farmworker" onchange="showOptions()" />
-                <label for="farmworker">
-                  <figure>
-                    <img src="images/icon-2.png" alt="Farmworker" />
-                  </figure>
-                  <span>FARMWORKER/LABORER</span>
-                </label>
+              <div class="form-input">
+                <select name="province" id="province">
+                  <option value="">PROVINCE</option>
+                </select>
+                <span class="select-icon"
+                  ><i class="zmdi zmdi-caret-down"></i
+                ></span>
               </div>
 
-              <div class="form-radio">
-                <input type="radio" name="job" value="fisherfolk" id="fisherfolk" onchange="showOptions()" />
-                <label for="fisherfolk">
-                  <figure>
-                    <img src="images/icon-3.png" alt="Fisherfolk" />
-                  </figure>
-                  <span>FISHERFOLK</span>
-                </label>
-              </div>
-
-              <div class="form-radio">
-                <input type="radio" name="job" value="agri_youth" id="agri_youth" onchange="showOptions()" />
-                <label for="agri_youth">
-                  <figure>
-                    <img src="images/icon-4.png" alt="Agri Youth" />
-                  </figure>
-                  <span>AGRI YOUTH</span>
-                </label>
+              <div class="form-input">
+                <select name="city" id="city">
+                  <option value="">CITY/MUNICIPALITY</option>
+                </select>
               </div>
             </div>
-          </div>
-        </fieldset>
-
-        <h3>TYPE</h3>
-        <fieldset id="typeFieldset">
-          <div id="farmerOptions" class="options">
-            <label>Type of Farming Activity:</label><br>
-            <input type="checkbox" id="rice" name="farming_type" value="rice"><label for="rice">Rice</label><br>
-            <input type="checkbox" id="corn" name="farming_type" value="corn"><label for="corn">Corn</label><br>
-            <input type="checkbox" id="other_crops" name="farming_type" value="other_crops"><label
-              for="other_crops">Other crops (please specify)</label><br>
-            <input type="checkbox" id="livestock" name="farming_type" value="livestock"><label for="livestock">Livestock
-              (please specify)</label><br>
-            <input type="checkbox" id="poultry" name="farming_type" value="poultry"><label for="poultry">Poultry (please
-              specify)</label>
-          </div>
-
-          <div id="farmworkerOptions" class="options">
-            <label>Kind of Work:</label><br>
-            <input type="checkbox" id="land_preparation" name="work_type" value="land_preparation"><label
-              for="land_preparation">Land Preparation</label><br>
-            <input type="checkbox" id="planting" name="work_type" value="planting"><label
-              for="planting">Planting/Transplanting</label><br>
-            <input type="checkbox" id="cultivation" name="work_type" value="cultivation"><label
-              for="cultivation">Cultivation</label><br>
-            <input type="checkbox" id="harvesting" name="work_type" value="harvesting"><label
-              for="harvesting">Harvesting</label><br>
-            <input type="checkbox" id="others" name="work_type" value="others"><label for="others">Others (please
-              specify)</label>
-          </div>
-
-          <div id="fisherfolkOptions" class="options">
-            <p>Note: The lending conduct shall coordinate with the Bureau of Fisheries and Aquatic Resources (BFAR) in
-              the issuance of a certification that the fisherfolk-borrower under PUNLA/PLEA is registered under the
-              Municipal Registration (FishR).</p>
-            <label>Type of Fishing Activity:</label><br>
-            <input type="checkbox" id="fish_capture" name="fishing_type" value="fish_capture"><label
-              for="fish_capture">Fish Capture</label><br>
-            <input type="checkbox" id="aquaculture" name="fishing_type" value="aquaculture"><label
-              for="aquaculture">Aquaculture</label><br>
-            <input type="checkbox" id="gleaning" name="fishing_type" value="gleaning"><label
-              for="gleaning">Gleaning</label><br>
-            <input type="checkbox" id="others_fishing" name="fishing_type" value="others"><label
-              for="others_fishing">Others (please specify)</label><br>
-            <input type="checkbox" id="fish_processing" name="fishing_type" value="fish_processing"><label
-              for="fish_processing">Fish Processing</label><br>
-            <input type="checkbox" id="fish_vending" name="fishing_type" value="fish_vending"><label
-              for="fish_vending">Fish Vending</label>
-          </div>
-
-          <div id="agriYouthOptions" class="options">
-            <p>Note: For the purposes of trainings, financial assistance, and other programs catered to the youth with
-              involvement in any agriculture activity.</p>
-            <label>Type of Involvement:</label><br>
-            <input type="checkbox" id="farming_household" name="youth_involvement" value="farming_household"><label
-              for="farming_household">Part of a farming household</label><br>
-            <input type="checkbox" id="formal_course" name="youth_involvement" value="formal_course"><label
-              for="formal_course">Attending/Attended formal agri-fishery related course</label><br>
-            <input type="checkbox" id="non_formal_course" name="youth_involvement" value="non_formal_course"><label
-              for="non_formal_course">Attending/Attended non-formal agri-fishery related course</label><br>
-            <input type="checkbox" id="agricultural_activity" name="youth_involvement"
-              value="agricultural_activity"><label for="agricultural_activity">Participated in any agricultural
-              activity/program</label><br>
-            <input type="checkbox" id="others_youth" name="youth_involvement" value="others"><label
-              for="others_youth">Others (please specify)</label>
-          </div>
-        </fieldset>
-
-        <h3>Address</h3>
-        <fieldset>
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <input type="text" name="street_name" id="street_name" placeholder="Street Name" />
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <select name="barangay" id="barangay">
+                  <option value="">BARANGAY</option>
+                </select>
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="street_number"
+                  id="street_number"
+                  placeholder="STREET/SITIO/SUBDV."
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="purok"
+                  id="purok"
+                  placeholder="HOUSE/LOT/BLDG. NO./PUROK"
+                />
+              </div>
             </div>
-            <div class="form-input">
-              <input type="text" name="street_number" id="street_number" placeholder="Street Number" />
-            </div>
-          </div>
-          <div class="form-row form-input-flex">
-            <div class="form-input">
-              <input type="text" name="city" id="city" placeholder="City" />
-            </div>
-            <div class="form-input">
-              <select name="country" id="country">
-                <option value="">Country</option>
-                <option value="Viet Nam">Viet Nam</option>
-                <option value="USA">USA</option>
-              </select>
-              <span class="select-icon"><i class="zmdi zmdi-caret-down"></i></span>
-            </div>
-          </div>
-        </fieldset>
+          </fieldset>
 
-      </form>
+          <h3>STEP 2</h3>
+          <fieldset>
+            <h4>Contact</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="number"
+                  name="number"
+                  id="number"
+                  placeholder="MOBILE NUMBER"
+                />
+              </div>
+            </div>
+            <hr />
+            <h4>Person to Contact in case of emergency</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="number"
+                  name="emergencyNumber"
+                  id="emergencyNumber"
+                  placeholder="MOBILE NUMBER"
+                />
+              </div>
+            </div>
+            <hr />
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <h4>DATE OF BIRTH</h4>
+                <input
+                  type="date"
+                  name="dateOfBirth"
+                  id="dateOfBirth"
+                  placeholder="DATE OF BIRTH"
+                />
+              </div>
+            </div>
+            <hr />
+            <h4>PLACE OF BIRTH:</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="birthMunicipaltiy"
+                  id="birthMunicipaltiy"
+                  placeholder="MUNICIPALITY"
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="birthProvince"
+                  id="birthProvince"
+                  placeholder="PROVINCE/STATE"
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="purok"
+                  id="purok"
+                  placeholder="HOUSE/LOT/BLDG. NO./PUROK"
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <h3>STEP 3</h3>
+          <fieldset>
+            <div class="form-radio">
+              <label for="job" class="label-radio" style="margin-top: 20px"
+                >What are you doing?</label
+              >
+              <div class="form-flex">
+                <div class="form-radio">
+                  <input
+                    type="radio"
+                    name="job"
+                    value="farmer"
+                    id="farmer"
+                    checked="checked"
+                    onchange="showOptions()"
+                  />
+                  <label for="farmer">
+                    <figure>
+                      <img src="images/icon-1.png" alt="Farmer" />
+                    </figure>
+                    <span>Farmer</span>
+                  </label>
+                </div>
+
+                <div class="form-radio">
+                  <input
+                    type="radio"
+                    name="job"
+                    value="farmworker"
+                    id="farmworker"
+                    onchange="showOptions()"
+                  />
+                  <label for="farmworker">
+                    <figure>
+                      <img src="images/icon-2.png" alt="Farmworker" />
+                    </figure>
+                    <span>FARMWORKER/LABORER</span>
+                  </label>
+                </div>
+
+                <div class="form-radio">
+                  <input
+                    type="radio"
+                    name="job"
+                    value="fisherfolk"
+                    id="fisherfolk"
+                    onchange="showOptions()"
+                  />
+                  <label for="fisherfolk">
+                    <figure>
+                      <img src="images/icon-3.png" alt="Fisherfolk" />
+                    </figure>
+                    <span>FISHERFOLK</span>
+                  </label>
+                </div>
+
+                <div class="form-radio">
+                  <input
+                    type="radio"
+                    name="job"
+                    value="agri_youth"
+                    id="agri_youth"
+                    onchange="showOptions()"
+                  />
+                  <label for="agri_youth">
+                    <figure>
+                      <img src="images/icon-4.png" alt="Agri Youth" />
+                    </figure>
+                    <span>AGRI YOUTH</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <h3>STEP 4</h3>
+          <fieldset>
+            <h4>Crop Area</h4>
+
+            <div class="form-row form-input-flex">
+              
+              <div class="form-input">
+                <input
+                  type="number"
+                  name="crop_area"
+                  id="crop_area"
+                  placeholder="CROP AREA IN HECTARS"
+                />
+              </div>
+            
+            </div>
+            <hr />
+            <h4>Crop Name</h4>
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <select name="crop_name" id="crop_name">
+                  <option value="">Piliin ang Pananim (Select Crop)</option>
+                  <option value="Palay/Rice">Palay/Rice (Palay)</option>
+                  <option value="Corn">Corn/Mais (Mais)</option>
+                  <option value="Mungbean">Mungbean/Monggo (Monggo)</option>
+                  <option value="Onion">Onion/Sibuyas (Sibuyas)</option>
+                  <option value="Garlic">Garlic/Bawang (Bawang)</option>
+                  <option value="Eggplant">Eggplant/Talong (Talong)</option>
+                  <option value="Tomato">Tomato/Kamatis (Kamatis)</option>
+                  <option value="Cabbage">Cabbage/Repolyo (Repolyo)</option>
+                  <option value="Carrot">Carrot/Karot (Karot)</option>
+                  <option value="Watermelon">Watermelon/Pakwan (Pakwan)</option>
+                </select>
+              </label>
+            </div>
+            <hr>
+            <h4>Farm Address</h4>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="province"
+                  id="province"
+                  placeholder="PROVINCE"
+                />
+              </div>
+
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  placeholder="MUNICIPALITY/CITY"
+                />
+              </div>
+
+            </div>
+            <div class="form-row form-input-flex">
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="barangay"
+                  id="barangay"
+                  placeholder="BARANGAY"
+                />
+              </div>
+              
+            </div>
+
+          
+          </fieldset>
+
+          <h3>STEP 9</h3>
+          <fieldset>
+            <h4>Account</h4>
+
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 2%;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="EMAIL"
+                />
+              </label>
+            </div>
+
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 2%;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="PASSWORD"
+                />
+              </label>
+            </div>
+
+            <div
+              class="form-row form-input-flex"
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 2%;
+              "
+            >
+              <label style="display: flex; align-items: center; gap: 10px">
+                <input
+                  type="password"
+                  name="confirm_password"
+                  id="confirm_password"
+                  placeholder="CONFIRM PASSWORD"
+                />
+              </label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- JS -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-  <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
-  <script src="vendor/jquery-steps/jquery.steps.min.js"></script>
-  <script src="js/main.js"></script>
-  <script>
-    function showOptions() {
-      const jobType = document.querySelector('input[name="job"]:checked').value;
-      const optionsContainer = document.querySelectorAll('.options');
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="vendor/jquery-steps/jquery.steps.min.js"></script>
+    <script src="js/main.js"></script>
 
-      // Hide all options initially
-      optionsContainer.forEach(option => option.style.display = 'none');
+    <script>
+      const regionUrl = "https://psgc.cloud/api/regions";
+      const provinceSelect = document.getElementById("province");
+      const regionSelect = document.getElementById("region");
+      const citySelect = document.getElementById("city");
+      const subMunicipalitySelect = document.getElementById("sub_municipality");
+      const barangaySelect = document.getElementById("barangay");
 
-      // Show the relevant options based on the job type
-      switch (jobType) {
-        case 'farmer':
-          document.getElementById('farmerOptions').style.display = 'block';
-          break;
-        case 'farmworker':
-          document.getElementById('farmworkerOptions').style.display = 'block';
-          break;
-        case 'fisherfolk':
-          document.getElementById('fisherfolkOptions').style.display = 'block';
-          break;
-        case 'agri_youth':
-          document.getElementById('agriYouthOptions').style.display = 'block';
-          break;
+      // Function to show loading indicator
+      function showLoadingIndicator() {
+        const loadingIndicator = document.createElement("div");
+        loadingIndicator.textContent = "Loading...";
+        loadingIndicator.id = "loadingIndicator";
+        document.body.appendChild(loadingIndicator);
       }
 
-      // Show the fieldset if any options are visible
-      document.getElementById('typeFieldset').style.display = 'block';
-    }
-  </script>
-</body>
+      // Function to hide loading indicator
+      function hideLoadingIndicator() {
+        const loadingIndicator = document.getElementById("loadingIndicator");
+        if (loadingIndicator) loadingIndicator.remove();
+      }
 
+      // Fetch regions on page load
+      fetch(regionUrl)
+        .then((response) => {
+          showLoadingIndicator();
+          if (!response.ok)
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          return response.json();
+        })
+        .then((data) => {
+          hideLoadingIndicator();
+          data.forEach((region) => {
+            const option = document.createElement("option");
+            option.value = region.code;
+            option.textContent = region.name;
+            regionSelect.appendChild(option);
+          });
+        })
+        .catch((error) => {
+          hideLoadingIndicator();
+          console.error("Error fetching regions:", error);
+        });
+
+      // Fetch provinces when a region is selected
+      regionSelect.addEventListener("change", function () {
+        const selectedRegion = this.value;
+        provinceSelect.innerHTML = '<option value="">PROVINCE</option>';
+        citySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
+        subMunicipalitySelect.innerHTML =
+          '<option value="">SUB-MUNICIPALITY</option>';
+        barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+
+        if (selectedRegion) {
+          const provinceUrl = `https://psgc.cloud/api/regions/${selectedRegion}/provinces`;
+
+          fetch(provinceUrl)
+            .then((response) => {
+              if (!response.ok)
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              return response.json();
+            })
+            .then((data) => {
+              data.forEach((province) => {
+                const option = document.createElement("option");
+                option.value = province.code;
+                option.textContent = province.name;
+                provinceSelect.appendChild(option);
+              });
+            })
+            .catch((error) =>
+              console.error("Error fetching provinces:", error)
+            );
+        }
+      });
+
+      // Fetch cities and municipalities when a province is selected
+      provinceSelect.addEventListener("change", function () {
+        const selectedProvince = this.value;
+        citySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
+        subMunicipalitySelect.innerHTML =
+          '<option value="">SUB-MUNICIPALITY</option>';
+        barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+
+        if (selectedProvince) {
+          const citiesUrl = `https://psgc.cloud/api/provinces/${selectedProvince}/cities-municipalities`;
+
+          fetch(citiesUrl)
+            .then((response) => {
+              if (!response.ok)
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              return response.json();
+            })
+            .then((data) => {
+              data.forEach((city) => {
+                const option = document.createElement("option");
+                option.value = city.code;
+                option.textContent = city.name;
+                citySelect.appendChild(option);
+              });
+
+              if (data.length === 0) {
+                const option = document.createElement("option");
+                option.textContent = "No cities/municipalities available";
+                citySelect.appendChild(option);
+              }
+            })
+            .catch((error) => console.error("Error fetching cities:", error));
+        }
+      });
+
+      // Fetch barangays when a city/municipality is selected
+      citySelect.addEventListener("change", function () {
+        const selectedCity = this.value;
+        barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
+
+        if (selectedCity) {
+          const barangayUrl = `https://psgc.cloud/api/cities-municipalities/${selectedCity}/barangays`;
+
+          fetch(barangayUrl)
+            .then((response) => {
+              if (!response.ok)
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              return response.json();
+            })
+            .then((data) => {
+              data.forEach((barangay) => {
+                const option = document.createElement("option");
+                option.value = barangay.code; // Assuming 'code' property exists for barangays
+                option.textContent = barangay.name; // Assuming 'name' property exists for barangays
+                barangaySelect.appendChild(option);
+              });
+
+              // If no barangays are found, display a message
+              if (data.length === 0) {
+                const option = document.createElement("option");
+                option.textContent = "No barangays available";
+                barangaySelect.appendChild(option);
+              }
+            })
+            .catch((error) =>
+              console.error("Error fetching barangays:", error)
+            );
+        }
+      });
+    </script>
+  </body>
 </html>
