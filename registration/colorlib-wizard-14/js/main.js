@@ -48,38 +48,40 @@
         bodyTag: "fieldset",
         transitionEffect: "fade",
         labels: {
-            previous : 'Previous',
-            next : 'Next',
-            finish : 'Finish',
-            current : ''
+            previous: 'Previous',
+            next: 'Next',
+            finish: 'Finish',
+            current: ''
         },
-        titleTemplate : '<h3 class="title">#title#</h3>',
-        onInit : function (event, currentIndex) { 
-            // Suppress (skip) "Warning" step if the user is old enough.
-            if(currentIndex === 0) {
+        titleTemplate: '<h3 class="title">#title#</h3>',
+        onInit: function (event, currentIndex) { 
+            if (currentIndex === 0) {
                 form.find('.actions').addClass('test');
             }
         },
-        onStepChanging: function (event, currentIndex, newIndex)
-        {
+        onStepChanging: function (event, currentIndex, newIndex) {
             form.validate().settings.ignore = ":disabled,:hidden";
-            return form.valid();
+            return form.valid(); // Proceed to the next step only if the form is valid
         },
-        onFinishing: function (event, currentIndex)
-        {
+        onFinishing: function (event, currentIndex) {
             form.validate().settings.ignore = ":disabled";
-            return form.valid();
+            return form.valid(); // Check the form validity when finishing
         },
-        onFinished: function (event, currentIndex)
-        {
-            alert('Sumited');
+        onFinished: function (event, currentIndex) {
+            // Validate the form before submission
+            if (form.valid()) {
+                // Submit the form if it's valid
+                form.submit(); // This will submit the form to the action specified in the form tag
+            } else {
+                // Show an error message if the form is invalid
+                alert("Please complete all required fields.");
+            }
         },
-        onStepChanged: function (event, currentIndex, priorIndex)
-        {
-
-         
+        onStepChanged: function (event, currentIndex, priorIndex) {
+            // No need to submit the form here; remove any form submission logic
         }
     });
+    
 
     jQuery.extend(jQuery.validator.messages, {
         required: "",
@@ -153,26 +155,6 @@ function readURL(input) {
     }
 }
 
-
-function toggleIdFields(isVisible) {
-    const idFields = document.getElementById("idFields");
-    idFields.style.display = isVisible ? "block" : "none";
-  }
-
-  function toggleIndigenousInput(isVisible) {
-    const indigenousDetails =
-      document.getElementById("indigenousDetails");
-    indigenousDetails.style.display = isVisible ? "block" : "none";
-  }
-
-  function toggleFarmerAssociationInput(isVisible) {
-    const farmerAssociationDetails = document.getElementById(
-      "farmerAssociationDetails"
-    );
-    farmerAssociationDetails.style.display = isVisible
-      ? "block"
-      : "none";
-  }
 
 
   

@@ -1,3 +1,67 @@
+<?php
+session_start(); // Start the session
+
+include '../includes/dbconn.php';
+// Database connection
+$dbConnection = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($dbConnection->connect_error) {
+    die("Connection failed: " . $dbConnection->connect_error);
+}
+
+
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sanitize and retrieve the user input
+    $email = $dbConnection->real_escape_string($_POST['email']);
+    $password = $_POST['password'];
+
+    // Prepare the SQL statement to prevent SQL injection
+    $sql = "SELECT * FROM UserAccounts WHERE email = '$email'";
+    $result = $dbConnection->query($sql);
+
+    // Check if user exists
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        
+        // Verify the password
+        if (password_verify($password, $user['password'])) {
+            // Store user data in session variables
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role'];
+
+            // Role-based redirection
+            switch ($user['role']) {
+                case 'admin':
+                    header("Location: ../Admin/index.php");
+                    exit();
+                case 'staff':
+                    header("Location: ../Staff/index.php");
+                    exit();
+                case 'user':
+                    header("Location: ../users/index.php");
+                    exit();
+                default:
+                    header("Location: ../../Public/login.php");
+                    exit();
+            }
+        } else {
+            echo "Invalid password. Please try again.";
+        }
+    } else {
+        echo "No account found with that email address.";
+    }
+}
+
+// Close the database connection
+$dbConnection->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
@@ -32,14 +96,14 @@
 					</div>
 					<h2 class="auth-heading text-center mb-5">Log in to Portal</h2>
 					<div class="auth-form-container text-start">
-						<form class="auth-form login-form">         
+					<form class="auth-form login-form" method="POST" action="">         
 							<div class="email mb-3">
 								<label class="sr-only" for="signin-email">Email</label>
-								<input id="signin-email" name="signin-email" type="email" class="form-control signin-email" placeholder="Email address" required="required">
+								<input id="signin-email" name="email" type="email" class="form-control signin-email" placeholder="Email address" required="required">
 							</div>
 							<div class="password mb-3">
 								<label class="sr-only" for="signin-password">Password</label>
-								<input id="signin-password" name="signin-password" type="password" class="form-control signin-password" placeholder="Password" required="required">
+								<input id="signin-password" name="password" type="password" class="form-control signin-password" placeholder="Password" required="required">
 								<div class="extra mt-3 row justify-content-between">
 									<div class="col-6">
 										<div class="form-check">
@@ -58,8 +122,9 @@
 								<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Log In</button>
 							</div>
 						</form>
+
 						<div class="auth-option text-center pt-5">
-							No Account? Sign up <a class="text-link" href="../../registration/colorlib-wizard-14/register.html" >here</a>.
+							No Account? Sign up <a class="text-link" href="../../registration/colorlib-wizard-14/register.php" >here</a>.
 						</div>
 					</div>    
 				</div>

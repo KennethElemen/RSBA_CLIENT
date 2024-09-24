@@ -1,3 +1,126 @@
+<?php
+include '../../RSBSA/includes/dbconn.php';
+
+// Create a database connection
+$dbConnection = new mysqli($servername, $username, $password, $dbname);
+
+// Check the connection
+if ($dbConnection->connect_error) {
+    die("Connection failed: " . $dbConnection->connect_error);
+}
+
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve and sanitize user input
+    $first_name = $dbConnection->real_escape_string($_POST['first_name']);
+    $middle_name = $dbConnection->real_escape_string($_POST['middle_name']);
+    $sur_name = $dbConnection->real_escape_string($_POST['sur_name']);
+    $sex = $dbConnection->real_escape_string($_POST['sex']);
+    $date_of_birth = $dbConnection->real_escape_string($_POST['dateOfBirth']);
+    $birth_municipality = $dbConnection->real_escape_string($_POST['birthMunicipaltiy']);
+    $birth_province = $dbConnection->real_escape_string($_POST['birthProvince']);
+    
+    // Handling profile picture upload
+    $profile_picture = null;
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 0) {
+        $target_dir = "../../RSBSA/assets/picture/";
+        $profile_picture = $target_dir . basename($_FILES["profile_picture"]["name"]);
+        if (!move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $profile_picture)) {
+            echo "Error uploading file.";
+            exit; // Exit if file upload fails
+        }
+    }
+
+    // Insert into Users table
+    $sql_users = "INSERT INTO Users (first_name, middle_name, sur_name, sex, date_of_birth, birth_municipality, birth_province, profile_picture)
+                  VALUES ('$first_name', '$middle_name', '$sur_name', '$sex', '$date_of_birth', '$birth_municipality', '$birth_province', '$profile_picture')";
+
+    if ($dbConnection->query($sql_users) === TRUE) {
+        $user_id = $dbConnection->insert_id; // Get the last inserted user ID
+        
+        // Insert into Addresses table (home address)
+        $region = $dbConnection->real_escape_string($_POST['region']);
+        $province = $dbConnection->real_escape_string($_POST['province']);
+        $city = $dbConnection->real_escape_string($_POST['city']);
+        $barangay = $dbConnection->real_escape_string($_POST['barangay']);
+        $street_number = $dbConnection->real_escape_string($_POST['street_number']);
+        $purok = $dbConnection->real_escape_string($_POST['purok']);
+        
+        $sql_address = "INSERT INTO Addresses (user_id, region, province, city_municipality, barangay, street_number, purok, address_type)
+                        VALUES ('$user_id', '$region', '$province', '$city', '$barangay', '$street_number', '$purok', 'home')";
+        if (!$dbConnection->query($sql_address)) {
+            echo "Error: " . $dbConnection->error;
+        }
+
+        // Insert into Contacts table (personal and emergency)
+        $personal_phone = $dbConnection->real_escape_string($_POST['number']);
+        $emergency_phone = $dbConnection->real_escape_string($_POST['emergencyNumber']);
+        
+        $sql_contact_personal = "INSERT INTO Contacts (user_id, phone_number, contact_type)
+                                 VALUES ('$user_id', '$personal_phone', 'personal')";
+        $sql_contact_emergency = "INSERT INTO Contacts (user_id, phone_number, contact_type)
+                                  VALUES ('$user_id', '$emergency_phone', 'emergency')";
+        $dbConnection->query($sql_contact_personal);
+        $dbConnection->query($sql_contact_emergency);
+
+       // Insert into Crops table
+        $crop_name = $dbConnection->real_escape_string($_POST['crop_name']);
+        $crop_area = $dbConnection->real_escape_string($_POST['crop_area']);
+        $benefits = $dbConnection->real_escape_string($_POST['benefits']);
+
+        // Function to generate a unique 8-digit reference number
+        function generateUniqueReference($dbConnection) {
+            do {
+                // Generate a random 8-digit number
+                $reference = rand(10000000, 99999999);
+
+                // Check if the reference number already exists in the Crops table
+                $checkReference = "SELECT reference FROM Crops WHERE reference = '$reference'";
+                $result = $dbConnection->query($checkReference);
+            } while ($result->num_rows > 0); // Repeat until a unique reference is found
+
+            return $reference;
+        }
+
+        // Generate unique reference
+        $reference = generateUniqueReference($dbConnection);
+
+        // Insert into the Crops table
+        $sql_crop = "INSERT INTO Crops (user_id, crop_name, crop_area_hectares, benefits, reference)
+                    VALUES ('$user_id', '$crop_name', '$crop_area', '$benefits', '$reference')";
+
+        $dbConnection->query($sql_crop);
+
+
+        // Insert into JobRoles table
+        $job_role = $dbConnection->real_escape_string($_POST['job']);
+        $sql_job = "INSERT INTO JobRoles (user_id, job_role)
+                    VALUES ('$user_id', '$job_role')";
+        $dbConnection->query($sql_job);
+
+        // Insert into UserAccounts table
+        $email = $dbConnection->real_escape_string($_POST['email']);
+        $accountStatus = $dbConnection->real_escape_string($_POST['accountStatus']);
+        $role = $dbConnection->real_escape_string($_POST['role']);
+        $password = password_hash($dbConnection->real_escape_string($_POST['password']), PASSWORD_DEFAULT);
+        
+        $sql_account = "INSERT INTO UserAccounts (user_id, email, password, accountStatus, role)
+                        VALUES ('$user_id', '$email', '$password', '$accountStatus', '$role')";
+        if ($dbConnection->query($sql_account) === FALSE) {
+            echo "Error: " . $dbConnection->error;
+        }
+        header("Location: ../../../RSBSA/Public/login.php"); 
+        echo "Data inserted successfully!";
+    } else {
+        echo "Error: " . $sql_users . "<br>" . $dbConnection->error;
+    }
+}
+
+$dbConnection->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +148,7 @@
           method="POST"
           id="signup-form"
           class="signup-form"
-          enctype="multipart/form-data"
+          action=""
         >
           <h3>STEP 1</h3>
           <fieldset>
@@ -35,18 +158,18 @@
                 <input
                   type="file"
                   class="inputfile"
-                  name="your_picture"
-                  id="your_picture"
+                  name="profile_picture"
+                  id="profile_picture"
                   onchange="readURL(this);"
                   data-multiple-caption="{count} files selected"
                   multiple
                 />
-                <label for="your_picture">
+                <label for="profile_picture">
                   <figure>
                     <img
                       src="images/your-picture.png"
                       alt=""
-                      class="your_picture_image"
+                      class="profile_picture"
                     />
                   </figure>
                   <span class="file-button">choose picture</span>
@@ -59,6 +182,7 @@
                     name="first_name"
                     id="first_name"
                     placeholder="First Name"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -67,6 +191,7 @@
                     name="middle_name"
                     id="middle_name"
                     placeholder="Middle Name"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -75,6 +200,7 @@
                     name="sur_name"
                     id="sur_name"
                     placeholder="Surname"
+                    required
                   />
                   <hr />
                   <div
@@ -93,12 +219,12 @@
                           margin: 20px 20px 20px 20px;
                         "
                       >
-                        <input type="radio" name="sex" value="male" />
+                        <input type="radio" name="sex" value="male" required/>
                         Male
                       </label>
 
                       <label style="display: flex; align-items: start">
-                        <input type="radio" name="sex" value="female" />
+                        <input type="radio" name="sex" value="female" required/>
                         Female
                       </label>
                     </div>
@@ -109,8 +235,8 @@
             <h4>Home Address</h4>
             <div class="form-row form-input-flex">
               <div class="form-input">
-                <select name="region" id="region">
-                  <option value="">
+                <select name="region" id="region" required>
+                  <option value="" >
                     REGION
                   </option>
                 </select>
@@ -118,17 +244,20 @@
               </div>
   
               <div class="form-input">
-                <select name="province" id="province">
-                  <option value="">
+                <select name="province" id="province" required>
+                  <option value="" required>
                     PROVINCE
                   </option>
                 </select>
                 <span class="select-icon"><i class="zmdi zmdi-caret-down"></i></span>
               </div>
-  
+              <input type="hidden" id="benefits" name="benefits" value="Pending">
+              <input type="hidden" id="reference" name="reference" value="">
+              <input type="hidden" id="accountStatus" name="accountStatus" value="Pending">
+              <input type="hidden" id="role" name="role" value="user">
               <div class="form-input">
-                <select name="city" id="city">
-                  <option value="">
+                <select name="city" id="city" required>
+                  <option value="" required>
                     CITY/MUNICIPALITY
                   </option>
                 </select>
@@ -136,8 +265,8 @@
             </div>
             <div class="form-row form-input-flex">
               <div class="form-input">
-                <select name="barangay" id="barangay">
-                  <option value="">
+                <select name="barangay" id="barangay" required>
+                  <option value="" required>
                     BARANGAY
                   </option>
                 </select>
@@ -146,8 +275,9 @@
                 <input
                   type="text"
                   name="street_number"
-                  id="street_number"
+                  id="street_number"  
                   placeholder="STREET/SITIO/SUBDV."
+                  required
                 />
               </div>
               <div class="form-input">
@@ -156,6 +286,7 @@
                   name="purok"
                   id="purok"
                   placeholder="HOUSE/LOT/BLDG. NO./PUROK"
+                  required
                 />
               </div>
             </div>
@@ -171,6 +302,7 @@
                   name="number"
                   id="number"
                   placeholder="MOBILE NUMBER"
+                  required
                 />
               </div>
             </div>
@@ -183,6 +315,7 @@
                   name="emergencyNumber"
                   id="emergencyNumber"
                   placeholder="MOBILE NUMBER"
+                  required
                 />
               </div>
             </div>
@@ -195,6 +328,7 @@
                   name="dateOfBirth"
                   id="dateOfBirth"
                   placeholder="DATE OF BIRTH"
+                  required
                 />
               </div>
             </div>
@@ -207,6 +341,7 @@
                   name="birthMunicipaltiy"
                   id="birthMunicipaltiy"
                   placeholder="MUNICIPALITY"
+                  required
                 />
               </div>
               <div class="form-input">
@@ -215,6 +350,7 @@
                   name="birthProvince"
                   id="birthProvince"
                   placeholder="PROVINCE/STATE"
+                  required
                 />
               </div>
               <div class="form-input">
@@ -223,6 +359,7 @@
                   name="purok"
                   id="purok"
                   placeholder="HOUSE/LOT/BLDG. NO./PUROK"
+                  required
                 />
               </div>
             </div>
@@ -243,6 +380,7 @@
                     id="farmer"
                     checked="checked"
                     onchange="showOptions()"
+                    
                   />
                   <label for="farmer">
                     <figure>
@@ -315,6 +453,7 @@
                   name="crop_area"
                   id="crop_area"
                   placeholder="CROP AREA IN HECTARS"
+                  required
                 />
               </div>
             
@@ -330,7 +469,7 @@
               "
             >
               <label style="display: flex; align-items: center; gap: 10px">
-                <select name="crop_name" id="crop_name">
+                <select name="crop_name" id="crop_name" required>
                   <option value="">Piliin ang Pananim (Select Crop)</option>
                   <option value="Palay/Rice">Palay/Rice (Palay)</option>
                   <option value="Corn">Corn/Mais (Mais)</option>
@@ -349,24 +488,24 @@
             <h4>Farm Address</h4>
             <div class="form-row form-input-flex">
               <div class="form-input">
-                <select name="region" id="step4_region">
+                <select name="region" id="step4_region" required>
                   <option value="">REGION</option>
                 </select>
               </div>
               <div class="form-input">
-                <select name="province" id="step4_province">
+                <select name="province" id="step4_province" required>
                   <option value="">PROVINCE</option>
                 </select>
               </div>
             </div>
             <div class="form-row form-input-flex">
               <div class="form-input">
-                <select name="city" id="step4_city">
+                <select name="city" id="step4_city" required>
                   <option value="">CITY/MUNICIPALITY</option>
                 </select>
               </div>
               <div class="form-input">
-                <select name="barangay" id="step4_barangay">
+                <select name="barangay" id="step4_barangay" required>
                   <option value="">BARANGAY</option>
                 </select>
               </div>
@@ -395,6 +534,7 @@
                   name="email"
                   id="email"
                   placeholder="EMAIL"
+                  required
                 />
               </label>
             </div>
@@ -414,6 +554,7 @@
                   name="password"
                   id="password"
                   placeholder="PASSWORD"
+                  required
                 />
               </label>
             </div>
@@ -433,9 +574,11 @@
                   name="confirm_password"
                   id="confirm_password"
                   placeholder="CONFIRM PASSWORD"
+                  required
                 />
               </label>
             </div>
+            <input type="submit" value="SUBMIT" />
           </fieldset>
         </form>
       </div>
@@ -447,258 +590,8 @@
     <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
     <script src="vendor/jquery-steps/jquery.steps.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/location.js"></script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const checkboxes = document.querySelectorAll('.checkbox-wrapper input[type="checkbox"]');
-  
-        checkboxes.forEach(checkbox => {
-          checkbox.addEventListener('change', function () {
-            const specifyInput = this.closest('.checkbox-wrapper').querySelector('.specify-input');
-            if (this.checked) {
-              specifyInput.style.display = 'block'; // Show input if checked
-            } else {
-              specifyInput.style.display = 'none'; // Hide input if unchecked
-            }
-          });
-        });
-      });
-    </script>
-  <script>
-    const regionUrl = 'https://psgc.cloud/api/regions';
-const provinceSelect = document.getElementById('province');
-const regionSelect = document.getElementById('region');
-const citySelect = document.getElementById('city');
-const barangaySelect = document.getElementById('barangay');
-
-// Function to show loading indicator
-function showLoadingIndicator() {
-    const loadingIndicator = document.createElement('div');
-    loadingIndicator.textContent = 'Loading...';
-    loadingIndicator.id = 'loadingIndicator';
-    document.body.appendChild(loadingIndicator);
-}
-
-// Function to hide loading indicator
-function hideLoadingIndicator() {
-    const loadingIndicator = document.getElementById('loadingIndicator');
-    if (loadingIndicator) loadingIndicator.remove();
-}
-
-// Fetch regions on page load
-fetch(regionUrl)
-    .then(response => {
-        showLoadingIndicator();
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        return response.json();
-    })
-    .then(data => {
-        hideLoadingIndicator();
-        data.forEach(region => {
-            const option = document.createElement('option');
-            option.value = region.code;
-            option.textContent = region.name;
-            regionSelect.appendChild(option);
-        });
-    })
-    .catch(error => {
-        hideLoadingIndicator();
-        console.error('Error fetching regions:', error);
-    });
-
-// Fetch provinces when a region is selected
-regionSelect.addEventListener('change', function() {
-    const selectedRegion = this.value;
-    provinceSelect.innerHTML = '<option value="">PROVINCE</option>';
-    citySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
-    barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
-
-    if (selectedRegion) {
-        const provinceUrl = `https://psgc.cloud/api/regions/${selectedRegion}/provinces`;
-
-        fetch(provinceUrl)
-            .then(response => {
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(province => {
-                    const option = document.createElement('option');
-                    option.value = province.code;
-                    option.textContent = province.name;
-                    provinceSelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error fetching provinces:', error));
-    }
-});
-
-// Fetch cities and municipalities when a province is selected
-provinceSelect.addEventListener('change', function() {
-    const selectedProvince = this.value;
-    citySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
-    barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
-
-    if (selectedProvince) {
-        const citiesUrl = `https://psgc.cloud/api/provinces/${selectedProvince}/cities-municipalities`;
-
-        fetch(citiesUrl)
-            .then(response => {
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(city => {
-                    const option = document.createElement('option');
-                    option.value = city.code;
-                    option.textContent = city.name;
-                    citySelect.appendChild(option);
-                });
-
-                if (data.length === 0) {
-                    const option = document.createElement('option');
-                    option.textContent = "No cities/municipalities available";
-                    citySelect.appendChild(option);
-                }
-            })
-            .catch(error => console.error('Error fetching cities:', error));
-    }
-});
-
-// Fetch barangays when a city/municipality is selected
-citySelect.addEventListener('change', function() {
-    const selectedCity = this.value;
-    barangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
-
-    if (selectedCity) {
-        const barangayUrl = `https://psgc.cloud/api/cities-municipalities/${selectedCity}/barangays`;
-
-        fetch(barangayUrl)
-            .then(response => {
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(barangay => {
-                    const option = document.createElement('option');
-                    option.value = barangay.code; // Assuming 'code' property exists for barangays
-                    option.textContent = barangay.name; // Assuming 'name' property exists for barangays
-                    barangaySelect.appendChild(option);
-                });
-
-                // If no barangays are found, display a message
-                if (data.length === 0) {
-                    const option = document.createElement('option');
-                    option.textContent = "No barangays available";
-                    barangaySelect.appendChild(option);
-                }
-            })
-            .catch(error => console.error('Error fetching barangays:', error));
-    }
-});
-
-  
-  </script>
-  <script>
-    const step4RegionSelect = document.getElementById('step4_region');
-const step4ProvinceSelect = document.getElementById('step4_province');
-const step4CitySelect = document.getElementById('step4_city');
-const step4BarangaySelect = document.getElementById('step4_barangay');
-
-// Fetch regions on page load
-fetch(regionUrl)
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    return response.json();
-  })
-  .then(data => {
-    data.forEach(region => {
-      const option = document.createElement('option');
-      option.value = region.code;
-      option.textContent = region.name;
-      step4RegionSelect.appendChild(option);
-    });
-  })
-  .catch(error => console.error('Error fetching regions:', error));
-
-// Fetch provinces when a region is selected
-step4RegionSelect.addEventListener('change', function() {
-  const selectedRegion = this.value;
-  step4ProvinceSelect.innerHTML = '<option value="">PROVINCE</option>';
-  step4CitySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
-  step4BarangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
-
-  if (selectedRegion) {
-    const provinceUrl = `https://psgc.cloud/api/regions/${selectedRegion}/provinces`;
-
-    fetch(provinceUrl)
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        data.forEach(province => {
-          const option = document.createElement('option');
-          option.value = province.code;
-          option.textContent = province.name;
-          step4ProvinceSelect.appendChild(option);
-        });
-      })
-      .catch(error => console.error('Error fetching provinces:', error));
-  }
-});
-
-// Fetch cities when a province is selected
-step4ProvinceSelect.addEventListener('change', function() {
-  const selectedProvince = this.value;
-  step4CitySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>';
-  step4BarangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
-
-  if (selectedProvince) {
-    const citiesUrl = `https://psgc.cloud/api/provinces/${selectedProvince}/cities-municipalities`;
-
-    fetch(citiesUrl)
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        data.forEach(city => {
-          const option = document.createElement('option');
-          option.value = city.code;
-          option.textContent = city.name;
-          step4CitySelect.appendChild(option);
-        });
-      })
-      .catch(error => console.error('Error fetching cities:', error));
-  }
-});
-
-// Fetch barangays when a city is selected
-step4CitySelect.addEventListener('change', function() {
-  const selectedCity = this.value;
-  step4BarangaySelect.innerHTML = '<option value="">BARANGAY</option>'; // Clear barangay dropdown
-
-  if (selectedCity) {
-    const barangayUrl = `https://psgc.cloud/api/cities-municipalities/${selectedCity}/barangays`;
-
-    fetch(barangayUrl)
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        return response.json();
-      })
-      .then(data => {
-        data.forEach(barangay => {
-          const option = document.createElement('option');
-          option.value = barangay.code; // Assuming 'code' property exists for barangays
-          option.textContent = barangay.name; // Assuming 'name' property exists for barangays
-          step4BarangaySelect.appendChild(option);
-        });
-      })
-      .catch(error => console.error('Error fetching barangays:', error));
-  }
-});
-
-  </script>
+    
   </body>
 </html>
