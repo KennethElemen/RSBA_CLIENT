@@ -94,3 +94,52 @@ searchMobileTrigger.addEventListener('click', () => {
 });
 
 
+function previewImage(event) {
+	const file = event.target.files[0];
+	const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+	const maxSize = 2 * 1024 * 1024; // 2MB
+
+	const imageError = document.getElementById('image-error');
+	imageError.style.display = 'none';
+
+	if (file) {
+		if (!allowedTypes.includes(file.type)) {
+			imageError.textContent = 'Please upload a valid image (JPEG, JPG, or PNG).';
+			imageError.style.display = 'block';
+			document.getElementById('modal-profile-picture').src = 'https://via.placeholder.com/150'; // Reset to default
+			return;
+		}
+
+		if (file.size > maxSize) {
+			imageError.textContent = 'File size must be less than 2MB.';
+			imageError.style.display = 'block';
+			document.getElementById('modal-profile-picture').src = 'https://via.placeholder.com/150'; // Reset to default
+			return;
+		}
+
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById('modal-profile-picture').src = e.target.result;
+		};
+		reader.readAsDataURL(file);
+	}
+}
+
+function validateForm() {
+	const form = document.getElementById('createStaffForm');
+	if (form.checkValidity() === false) {
+		// Trigger validation UI
+		Array.from(form.elements).forEach(element => {
+			if (!element.checkValidity()) {
+				element.classList.add('is-invalid');
+			} else {
+				element.classList.remove('is-invalid');
+			}
+		});
+		form.reportValidity(); // Show validation messages
+	} else {
+		form.submit(); // Submit the form if valid
+	}
+}
+
+

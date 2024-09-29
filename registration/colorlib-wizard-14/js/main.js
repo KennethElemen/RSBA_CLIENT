@@ -48,6 +48,7 @@
         bodyTag: "fieldset",
         transitionEffect: "fade",
         labels: {
+            
             previous: 'Previous',
             next: 'Next',
             finish: 'Finish',
@@ -154,7 +155,6 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
 
 
   

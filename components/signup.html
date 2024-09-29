@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>RSBSA Registration Form</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+
+    <style>
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            font-weight: bold;
+        }
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .form-control {
+            padding: 0.5rem;
+            width: 100%;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head> 
+
+<body class="app app-signup p-0">
+    <div class="row g-0 app-auth-wrapper">
+        <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+            <div class="d-flex flex-column align-content-end">
+                <div class="app-auth-body mx-auto">
+                    <div class="app-auth-branding mb-4">
+                        <a class="app-logo" href="index.html">
+                            <img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo">
+                        </a>
+                    </div>
+                    <h2 class="auth-heading text-center mb-4">RSBSA Registration</h2>
+
+                    <div class="auth-form-container text-start mx-auto">
+                        <form class="auth-form auth-signup-form" id="rsbsaForm">
+                            
+                            <!-- Step 1: Personal Information -->
+                            <div class="step active">
+                                <h3>Personal Information</h3>
+                                <div class="form-row">
+                                    <input id="surname" name="surname" type="text" class="form-control" placeholder="Surname" required>
+                                    <input id="first-name" name="first-name" type="text" class="form-control" placeholder="First Name" required>
+                                </div>
+                                <div class="form-row">
+                                    <input id="middle-name" name="middle-name" type="text" class="form-control" placeholder="Middle Name">
+                                    <input id="extension-name" name="extension-name" type="text" class="form-control" placeholder="Extension Name (Optional)">
+                                </div>
+                                <div class="form-row">
+                                    <label>Sex:</label>
+                                    <div>
+                                        <input type="radio" id="male" name="sex" value="male" required> Male
+                                        <input type="radio" id="female" name="sex" value="female"> Female
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <input id="address" name="address" type="text" class="form-control" placeholder="Address" required>
+                                </div>
+                                <div class="btn-container">
+                                    <button type="button" class="btn app-btn-primary" onclick="nextStep()">Next</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Information -->
+                            <div class="step">
+                                <h3>Contact Information</h3>
+                                <div class="form-row">
+                                    <input id="mobile-number" name="mobile-number" type="text" class="form-control" placeholder="Mobile Number" required>
+                                    <input id="landline-number" name="landline-number" type="text" class="form-control" placeholder="Landline Number (Optional)">
+                                </div>
+                                <div class="form-row">
+                                    <label for="birth-date">Date of Birth:</label>
+                                    <input id="birth-date" name="birth-date" type="date" class="form-control" required>
+                                </div>
+                                <div class="btn-container">
+                                    <button type="button" class="btn app-btn-secondary" onclick="prevStep()">Back</button>
+                                    <button type="button" class="btn app-btn-primary" onclick="nextStep()">Next</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Education & Disability Information -->
+                            <div class="step">
+                                <h3>Education & Disability Information</h3>
+                                <div class="form-group">
+                                    <label for="education">Highest Formal Education:</label>
+                                    <select id="education" name="education" class="form-control" required>
+                                        <option value="Pre-school">Pre-school</option>
+                                        <option value="Elementary">Elementary</option>
+                                        <option value="High School">High School</option>
+                                        <option value="Vocational">Vocational</option>
+                                        <option value="College">College</option>
+                                        <option value="Post-graduate">Post-graduate</option>
+                                        <option value="None">None</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Person with Disability (PWD):</label>
+                                    <div>
+                                        <input type="radio" id="pwd-yes" name="pwd" value="Yes"> Yes
+                                        <input type="radio" id="pwd-no" name="pwd" value="No" checked> No
+                                    </div>
+                                </div>
+                                <div class="btn-container">
+                                    <button type="button" class="btn app-btn-secondary" onclick="prevStep()">Back</button>
+                                    <button type="button" class="btn app-btn-primary" onclick="nextStep()">Next</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Emergency Contact & Submit -->
+                            <div class="step">
+                                <h3>Emergency Contact Information</h3>
+                                <div class="form-row">
+                                    <input id="emergency-contact" name="emergency-contact" type="text" class="form-control" placeholder="Person to Notify in Case of Emergency" required>
+                                </div>
+                                <div class="form-row">
+                                    <input id="contact-number" name="contact-number" type="text" class="form-control" placeholder="Contact Number" required>
+                                </div>
+                                <div class="btn-container">
+                                    <button type="button" class="btn app-btn-secondary" onclick="prevStep()">Back</button>
+                                    <button type="submit" class="btn app-btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <div class="auth-option text-center pt-5">
+                            Already registered? <a class="text-link" href="/login.html">Log in</a>
+                        </div>
+                    </div><!--//auth-form-container-->
+                </div><!--//auth-body-->
+
+                <footer class="app-auth-footer">
+                    <div class="container text-center py-3">
+                        <small class="copyright">Designed by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+                    </div>
+                </footer>
+            </div><!--//flex-column-->   
+        </div><!--//auth-main-col-->
+
+        <!-- Background section -->
+        <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+            <div class="auth-background-holder"></div>
+            <div class="auth-background-mask"></div>
+            <div class="auth-background-overlay p-3 p-lg-5">
+                <div class="d-flex flex-column align-content-end h-100">
+                    <div class="h-100"></div>
+                    <div class="overlay-content p-3 p-lg-4 rounded">
+                        <h5 class="mb-3 overlay-title">Explore Portal Admin Template</h5>
+                        <div>Portal is a free Bootstrap 5 admin dashboard template. You can download it <a href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">here</a>.</div>
+                    </div>
+                </div>
+            </div><!--//auth-background-overlay-->
+        </div><!--//auth-background-col-->
+    </div><!--//row-->
+
+    <script>
+        let currentStep = 0;
+        const steps = document.querySelectorAll('.step');
+
+        function showStep(step) {
+            steps.forEach((s, index) => {
+                s.classList.toggle('active', index === step);
+            });
+        }
+
+        function nextStep() {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        showStep(currentStep);
+    </script>
+</body>
+</html>

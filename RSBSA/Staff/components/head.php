@@ -4,11 +4,34 @@
 // Include the session checking function
 require_once('../includes/check_session.php');
 
+
 checkSession($conn, ['staff']);
 
-// The rest of your admin-specific code goes here
-// For example, displaying admin dashboard content
+// Fetch the user_id from the session
+$user_id = $_SESSION['user_id']; // Adjust according to your session variable
+
+// Prepare and execute the query to fetch the profile_picture
+$query = "SELECT profile_picture FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Check if a result is returned
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $profile_picture = $row['profile_picture'];
+} else {
+    $profile_picture = '../assets/images/default_user.png'; // Default image if no picture found
+}
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
 ?>
+
+
+
     <title>Agriland</title>
     
     <!-- Meta -->
