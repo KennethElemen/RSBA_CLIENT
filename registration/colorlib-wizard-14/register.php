@@ -93,11 +93,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insert into Contacts table (personal and emergency)
         $personal_phone = $dbConnection->real_escape_string($_POST['number']);
         $emergency_phone = $dbConnection->real_escape_string($_POST['emergencyNumber']);
-        
+        $emergency_contact_name = $dbConnection->real_escape_string($_POST['emergency_ContactName']); // New field
+
         $sql_contact_personal = "INSERT INTO Contacts (user_id, phone_number, contact_type)
-                                 VALUES ('$user_id', '$personal_phone', 'personal')";
-        $sql_contact_emergency = "INSERT INTO Contacts (user_id, phone_number, contact_type)
-                                  VALUES ('$user_id', '$emergency_phone', 'emergency')";
+                                VALUES ('$user_id', '$personal_phone', 'personal')";
+
+        $sql_contact_emergency = "INSERT INTO Contacts (user_id, phone_number, contact_type, emergency_ContactName)
+                                  VALUES ('$user_id', '$emergency_phone', 'emergency', '$emergency_contact_name')";
+
         $dbConnection->query($sql_contact_personal);
         $dbConnection->query($sql_contact_emergency);
 
@@ -379,6 +382,15 @@ $dbConnection->close();
                   name="emergencyNumber"
                   id="emergencyNumber"
                   placeholder="MOBILE NUMBER"
+                  required
+                />
+              </div>
+              <div class="form-input">
+                <input
+                  type="text"
+                  name="emergency_ContactName"
+                  id="emergency_ContactName"
+                  placeholder="Name "
                   required
                 />
               </div>

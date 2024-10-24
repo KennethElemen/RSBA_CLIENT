@@ -317,67 +317,197 @@ $(document).ready(function() {
 });
 
   
-function confirmDelete(userId) {
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "Do you want to reject this user? This action cannot be undone.",
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#d33',
-		cancelButtonColor: '#3085d6',
-		confirmButtonText: 'Yes, reject!',
-		cancelButtonText: 'Cancel'
-	}).then((result) => {
-		if (result.isConfirmed) {
-			$.ajax({
-				url: 'reject_user.php',
-				type: 'POST',
-				data: { user_id: userId },
-				dataType: 'json',
-				success: function(data) {
-					// Check if the response is structured correctly
-					if (data && typeof data.success === 'boolean') {
-						if (data.success) {
-							Swal.fire({
-								title: 'Rejected!',
-								text: 'The user has been rejected successfully.',
-								icon: 'success',
-								confirmButtonText: 'OK'
-							}).then(() => {
-								$('#user-row-' + userId).remove(); // Optionally remove user row
-								location.reload(); // Reload the page to reflect changes
-							});
-						} else {
-							Swal.fire({
-								title: 'Error!',
-								text: "Failed to reject the user: " + (data.message || "Unknown error."),
-								icon: 'error',
-								confirmButtonText: 'OK'
-							});
-						}
-					} else {
-						Swal.fire({
-							title: 'Unexpected Response',
-							text: 'Unexpected response from the server.',
-							icon: 'error',
-							confirmButtonText: 'OK'
-						});
-					}
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					console.error('Error:', textStatus, errorThrown);
-					Swal.fire({
-						title: 'Error!',
-						text: 'An error occurred while rejecting the user. Please try again.',
-						icon: 'error',
-						confirmButtonText: 'OK'
-					});
-				}
-			});
-		}
-	});
-}
+
 
 </script>
 
 
+<?php
+include '../includes/dbconn.php';
+
+$dbConnection = new mysqli($servername, $username, $password, $dbname);
+if ($dbConnection->connect_error) {
+    die("Connection failed: " . $dbConnection->connect_error);
+}
+
+$user_id = $_SESSION['user_id']; // Get logged-in user ID
+
+// Validate that the user is admin or staff
+$checkRoleQuery = "SELECT role FROM useraccounts WHERE user_id = ?";
+$stmt = $dbConnection->prepare($checkRoleQuery);
+$stmt->bind_param('i', $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+
+if (!$user || !in_array($user['role'], ['admin', 'staff'])) {
+    echo "<script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Unauthorized',
+            text: 'You are not authorized to post announcements!',
+        }).then(() => {
+            window.location.href = 'dashboard.php'; // Redirect to dashboard
+        });
+    </script>";
+    exit;
+}
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Handle form data
+    $title = mysqli_real_escape_string($dbConnection, $_POST['title']);
+    $content = mysqli_real_escape_string($dbConnection, $_POST['content']);
+    $expiration_date = !empty($_POST['expiration_date']) ? $_POST['expiration_date'] : NULL;
+    $attachment_url = NULL;
+
+    // Handle file upload
+    if (!empty($_FILES['attachment']['name'])) {
+        $target_dir = "../assets/images/announcement/";  // Updated directory
+        $target_file = $target_dir . basename($_FILES["attachment"]["name"]);
+        $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // Allow certain file formats
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'pdf'];
+        if (!in_array($fileType, $allowedTypes)) {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid File Type',
+                    text: 'Only JPG, JPEG, PNG, and PDF files are allowed!',
+                });
+            </script>";
+            exit;
+        }
+
+        // Check file size (limit to 5MB)
+        if ($_FILES["attachment"]["size"] > 5000000) {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'File Too Large',
+                    text: 'Your file is too large (limit 5MB).',
+                });
+            </script>";
+            exit;
+        }
+
+        if (move_uploaded_file($_FILES["attachment"]["tmp_name"], $target_file)) {
+            $attachment_url = $target_file; // Save the file URL to the database
+        } else {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Upload Error',
+                    text: 'There was an error uploading your file.',
+                });
+            </script>";
+            exit;
+        }
+    }
+
+    // Insert the announcement into the database
+    $insertQuery = "INSERT INTO announcements (title, content, expiration_date, status, attachment_url, posted_by, role) 
+                    VALUES (?, ?, ?, 'active', ?, ?, ?)";
+    $stmt = $dbConnection->prepare($insertQuery);
+    $stmt->bind_param('ssssss', $title, $content, $expiration_date, $attachment_url, $user_id, $user['role']);
+
+    if ($stmt->execute()) {
+        // Show success message using SweetAlert
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Your announcement has been posted successfully.',
+            });
+        </script>";
+    } else {
+        echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Database Error',
+                text: 'Error: {$stmt->error}',
+            });
+        </script>";
+    }
+
+    // Close the connection
+    $stmt->close();
+}
+
+$dbConnection->close();
+?>
+
+<!-- Modal for posting announcement -->
+<div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="announcementModalLabel">Post New Announcement</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="announcementForm" method="POST" action="" enctype="multipart/form-data">
+          <!-- Announcement Title -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Announcement Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+          
+          <!-- Content -->
+          <div class="row">
+            <div class="col-8">
+              <div class="mb-3">
+                <label for="content" class="form-label">Content (Max 600 characters)</label>
+                <textarea class="form-control" id="content" name="content" rows="6" maxlength="600" required></textarea>
+                <div class="text-muted">Characters left: <span id="charCount">600</span></div>
+              </div>
+            </div>
+            <div class="col-4 text-center">
+              <label for="attachment">
+                <img id="imagePreview" src="https://via.placeholder.com/150" alt="Image Preview" class="img-fluid border border-primary" style="width: 80%; cursor: pointer;">
+              </label>
+              <input type="file" id="attachment" name="attachment" accept="image/*" style="display: none;" onchange="previewAttachmentImage(event)">
+              <small class="text-muted d-block">Click the image to upload an attachment</small>
+              <div id="image-error" class="text-danger" style="display: none;"></div>
+            </div>
+          </div>
+
+          <!-- Expiration Date -->
+          <div class="mb-3">
+            <label for="expiration_date" class="form-label">Expiration Date (optional)</label>
+            <input type="date" class="form-control" id="expiration_date" name="expiration_date" value="<?php echo date('Y-m-d'); ?>">
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-success w-100">Post Announcement</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Preview the uploaded image
+  function previewAttachmentImage(event) {
+    const imagePreview = document.getElementById('imagePreview');
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        imagePreview.src = e.target.result;
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Update character count for content
+  const contentField = document.getElementById('content');
+  const charCountDisplay = document.getElementById('charCount');
+
+  contentField.addEventListener('input', function() {
+    const remainingChars = 600 - contentField.value.length;
+    charCountDisplay.textContent = remainingChars >= 0 ? remainingChars : 0;
+  });
+</script>

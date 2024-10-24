@@ -8,15 +8,8 @@
 	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
-
-
 			    <h1 class="app-page-title">Overview</h1>
 				
-
-			
-					
-
-            
 			    <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
 				    <div class="inner">
 					    <div class="app-card-body p-3 p-lg-4">
@@ -157,7 +150,9 @@
 							    <div class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquet eros vel diam semper mollis.</div>
 						    </div><!--//app-card-body-->
 						    <div class="app-card-footer p-4 mt-auto">
-							   <a class="btn app-btn-secondary" href="#">Create New</a>
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#announcementModal">
+									Post New Announcement
+								</button>
 						    </div><!--//app-card-footer-->
 						</div><!--//app-card-->
 				    </div><!--//col-->
@@ -165,10 +160,11 @@
 							        
 			    
 		    </div><!--//container-fluid-->
+			<?php include 'modals.php' ?>
 	    </div><!--//app-content-->
 	    
 		<?php include 'components/footer.php' ?>
-	    
+	  
     </div><!--//app-wrapper-->    					
 
  
@@ -184,8 +180,10 @@
     // Update the time every second
     setInterval(updateTime, 1000);
     updateTime(); // Initial call
+	
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<?php include 'components/script.php'; ?>
 
 

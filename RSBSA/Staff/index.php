@@ -8,19 +8,18 @@
 	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
-			    
 			    <h1 class="app-page-title">Overview</h1>
+				
 			    <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
 				    <div class="inner">
 					    <div class="app-card-body p-3 p-lg-4">
-						    <h3 class="mb-3">Welcome, Staff</h3>
+						    <h3 class="mb-3">Welcome, staff!</h3>
 						    <div class="row gx-5 gy-3">
 						        <div class="col-12 col-lg-9">
 							        
 							        <div></div>
 							    </div><!--//col-->
 							    <div class="col-12 col-lg-3">
-								   
 							    </div><!--//col-->
 						    </div><!--//row-->
 						    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -28,137 +27,287 @@
 					    
 				    </div><!--//inner-->
 			    </div><!--//app-card-->
-	
-	
+			
 				    
 			    <div class="row g-4 mb-4">
-				    
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">TOTAL USERS</h4>
-							    <div class="stats-figure">23</div>
-							    <div class="stats-meta">
-								    Open</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-					<div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">TOTAL APPLICANTS</h4>
-							    <div class="stats-figure">23</div>
-							    <div class="stats-meta">
-								    Open</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">TOTAL REGISTERED LAND</h4>
-							    <div class="stats-figure">6</div>
-							    <div class="stats-meta">New</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
-			    </div><!--//row-->
+					
+				<a class="weatherwidget-io" href="https://forecast7.com/en/15d32120d83/san-antonio/" data-label_1="SAN ANTONIO" data-label_2="WEATHER" data-theme="pure" >SAN ANTONIO WEATHER</a>
+									<script>
+									!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+									</script>
+				     <!-- Clock Section -->
+				
+					 <div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4 text-center">
+								<h4 class="app-card-title">Real-time Clock</h4>
+								<div class="stats-figure" id="clock" style="font-size: 30px; font-weight: bold; color: green;"></div>
+							</div><!--//app-card-body-->
+							<a class="app-card-link-mask" href="#"></a>
+						</div><!--//app-card-->
+					</div><!--//col-->
 
-			 
-			    <div class="row g-4 mb-4">
-				    <div class="col-12 col-lg-4">
-					    <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-						    <div class="app-card-header p-3 border-bottom-0">
-						        <div class="row align-items-center gx-3">
-							        <div class="col-auto">
-								        <div class="app-icon-holder">
-										    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
-  <path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
-</svg>
-									    </div><!--//icon-holder-->
-						                
-							        </div><!--//col-->
-							        <div class="col-auto">
-								        <h4 class="app-card-title">Announcement</h4>
-							        </div><!--//col-->
-						        </div><!--//row-->
-						    </div><!--//app-card-header-->
-						    <div class="app-card-body px-4">
-							    
-							    <div class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquet eros vel diam semper mollis.</div>
-						    </div><!--//app-card-body-->
-						    <div class="app-card-footer p-4 mt-auto">
-							   <a class="btn app-btn-secondary" href="#">Create New</a>
-						    </div><!--//app-card-footer-->
+
+				    <?php
+					// Assuming you have a database connection file included
+					include '../includes/dbconn.php';
+
+					
+
+					// Query to count total users
+					$usersQuery = "SELECT COUNT(*) as total_users FROM useraccounts";
+					$usersResult = mysqli_query($conn, $usersQuery);
+					$usersCount = mysqli_fetch_assoc($usersResult)['total_users'];
+
+					// Query to count registered land (crops with benefits marked as 'qualified')
+					$cropsQuery = "SELECT COUNT(*) as total_registered_land FROM crops WHERE benefits = 'qualified'";
+					$cropsResult = mysqli_query($conn, $cropsQuery);
+					$cropsCount = mysqli_fetch_assoc($cropsResult)['total_registered_land'];
+
+					// Query to count pending user accounts
+					$pendingUsersQuery = "SELECT COUNT(*) as pending_users FROM useraccounts WHERE accountStatus = 'pending'";
+					$pendingUsersResult = mysqli_query($conn, $pendingUsersQuery);
+					$pendingUsersCount = mysqli_fetch_assoc($pendingUsersResult)['pending_users'];
+
+					// Query to count crops with benefits not marked as 'qualified'
+					$notQualifiedCropsQuery = "SELECT COUNT(*) as not_qualified_land FROM crops WHERE benefits != 'qualified'";
+					$notQualifiedCropsResult = mysqli_query($conn, $notQualifiedCropsQuery);
+					$notQualifiedCropsCount = mysqli_fetch_assoc($notQualifiedCropsResult)['not_qualified_land'];
+					?>
+
+					
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">TOTAL USERS</h4>
+								<div class="stats-figure"><?php echo $usersCount; ?></div>
+								<div class="stats-meta">Open</div>
+							</div><!--//app-card-body-->
+							<a class="app-card-link-mask" href="#"></a>
 						</div><!--//app-card-->
-				    </div><!--//col-->
-				    <div class="col-12 col-lg-4">
-					    <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-						    <div class="app-card-header p-3 border-bottom-0">
-						        <div class="row align-items-center gx-3">
-							        <div class="col-auto">
-								        <div class="app-icon-holder">
-										    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-code-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-  <path fill-rule="evenodd" d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0zm2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0z"/>
-</svg>
-									    </div><!--//icon-holder-->
-						                
-							        </div><!--//col-->
-							        <div class="col-auto">
-								        <h4 class="app-card-title">Apps</h4>
-							        </div><!--//col-->
-						        </div><!--//row-->
-						    </div><!--//app-card-header-->
-						    <div class="app-card-body px-4">
-							    
-							    <div class="intro">Pellentesque varius, elit vel volutpat sollicitudin, lacus quam efficitur augue</div>
-						    </div><!--//app-card-body-->
-						    <div class="app-card-footer p-4 mt-auto">
-							   <a class="btn app-btn-secondary" href="#">Create New</a>
-						    </div><!--//app-card-footer-->
+					</div><!--//col-->
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">TOTAL REGISTERED LAND</h4>
+								<div class="stats-figure"><?php echo $cropsCount; ?></div>
+								<div class="stats-meta">New</div>
+							</div><!--//app-card-body-->
+							<a class="app-card-link-mask" href="#"></a>
 						</div><!--//app-card-->
-				    </div><!--//col-->
-				    <div class="col-12 col-lg-4">
-					    <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-						    <div class="app-card-header p-3 border-bottom-0">
-						        <div class="row align-items-center gx-3">
-							        <div class="col-auto">
-								        <div class="app-icon-holder">
-										    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tools" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M0 1l1-1 3.081 2.2a1 1 0 0 1 .419.815v.07a1 1 0 0 0 .293.708L10.5 9.5l.914-.305a1 1 0 0 1 1.023.242l3.356 3.356a1 1 0 0 1 0 1.414l-1.586 1.586a1 1 0 0 1-1.414 0l-3.356-3.356a1 1 0 0 1-.242-1.023L9.5 10.5 3.793 4.793a1 1 0 0 0-.707-.293h-.071a1 1 0 0 1-.814-.419L0 1zm11.354 9.646a.5.5 0 0 0-.708.708l3 3a.5.5 0 0 0 .708-.708l-3-3z"/>
-  <path fill-rule="evenodd" d="M15.898 2.223a3.003 3.003 0 0 1-3.679 3.674L5.878 12.15a3 3 0 1 1-2.027-2.027l6.252-6.341A3 3 0 0 1 13.778.1l-2.142 2.142L12 4l1.757.364 2.141-2.141zm-13.37 9.019L3.001 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
-</svg>
-									    </div><!--//icon-holder-->
-						                
-							        </div><!--//col-->
-							        <div class="col-auto">
-								        <h4 class="app-card-title">Tools</h4>
-							        </div><!--//col-->
-						        </div><!--//row-->
-						    </div><!--//app-card-header-->
-						    <div class="app-card-body px-4">
-							    
-							    <div class="intro">Sed maximus, libero ac pharetra elementum, turpis nisi molestie neque, et tincidunt velit turpis non enim.</div>
-						    </div><!--//app-card-body-->
-						    <div class="app-card-footer p-4 mt-auto">
-							   <a class="btn app-btn-secondary" href="#">Create New</a>
-						    </div><!--//app-card-footer-->
+					</div><!--//col-->
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">PENDING USER ACCOUNTS</h4>
+								<div class="stats-figure"><?php echo $pendingUsersCount; ?></div>
+							</div><!--//app-card-body-->
+							<a class="app-card-link-mask" href="#"></a>
 						</div><!--//app-card-->
-				    </div><!--//col-->
-			    </div><!--//row-->
+					</div><!--//col-->
+					<div class="col-6 col-lg-3">
+						<div class="app-card app-card-stat shadow-sm h-100">
+							<div class="app-card-body p-3 p-lg-4">
+								<h4 class="stats-type mb-1">NOT QUALIFIED BENEFITS</h4>
+								<div class="stats-figure"><?php echo $notQualifiedCropsCount; ?></div>
+							</div><!--//app-card-body-->
+							<a class="app-card-link-mask" href="#"></a>
+						</div><!--//app-card-->
+					</div><!--//col-->
+			 <hr>
+					<div class="row g-4 mb-4">
+						<div class="col-12 col-lg-4">
+							<div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+								<div class="app-card-header p-3 border-bottom-0">
+									<div class="row align-items-center gx-3">
+										<div class="col-auto">
+											<div class="app-icon-holder">
+												<!-- Announcement icon (Speaker icon for announcement) -->
+												<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-megaphone" viewBox="0 0 16 16">
+													<path d="M7 6.5c0 .795-.504 1.47-1.215 1.75v.5c0 .552-.448 1-1 1s-1-.448-1-1v-.5A1.75 1.75 0 1 1 7 6.5zM5.285 6h1.43c.157-.252.285-.535.285-.875s-.128-.623-.285-.875h-1.43c.157.252.285.535.285.875s-.128.623-.285.875z"/>
+													<path fill-rule="evenodd" d="M8 6a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H5.5a.5.5 0 0 0 0 1H7v1H5.5a.5.5 0 0 0 0 1H8zm5-3H8.246C8.09 1.667 7.64 1 7 1s-1.09.667-1.246 1.5H3.5C2.672 2.5 2 3.172 2 4v6c0 .828.672 1.5 1.5 1.5h.254c.156.833.606 1.5 1.246 1.5s1.09-.667 1.246-1.5H13c.828 0 1.5-.672 1.5-1.5V4c0-.828-.672-1.5-1.5-1.5zM14 4v6H2V4h12z"/>
+												</svg>
+											</div><!--//icon-holder-->
+										</div><!--//col-->
+										<div class="col-auto">
+											<h4 class="app-card-title">Announcement</h4>
+										</div><!--//col-->
+									</div><!--//row-->
+								</div><!--//app-card-header-->
+								<div class="app-card-body px-4">
+									<div class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquet eros vel diam semper mollis.</div>
+								</div><!--//app-card-body-->
+								<div class="app-card-footer p-4 mt-auto">
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#announcementModal">
+										Post New Announcement
+									</button>
+								</div><!--//app-card-footer-->
+							</div><!--//app-card-->
+						</div><!--//col-->
+						
+						<div class="col-12 col-lg-4">
+							<div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+								<div class="app-card-header p-3 border-bottom-0">
+									<div class="row align-items-center gx-3">
+										<div class="col-auto">
+											<div class="app-icon-holder icon-holder-mono">
+												<!-- Help icon (Headset icon for help) -->
+												<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+													<path d="M8 1a5 5 0 0 0-5 5v4.5H2V6a6 6 0 1 1 12 0v4.5h-1V6a5 5 0 0 0-5-5z"/>
+													<path d="M11 8a1 1 0 0 1 1-1h2v4a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V8zM5 8a1 1 0 0 0-1-1H2v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V8z"/>
+													<path fill-rule="evenodd" d="M13.5 8.5a.5.5 0 0 1 .5.5v3a2.5 2.5 0 0 1-2.5 2.5H8a.5.5 0 0 1 0-1h3.5A1.5 1.5 0 0 0 13 12V9a.5.5 0 0 1 .5-.5z"/>
+													<path d="M6.5 14a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2h-1a1 1 0 0 1-1-1z"/>
+												</svg>
+											</div><!--//icon-holder-->
+										</div><!--//col-->
+										<div class="col-auto">
+											<h4 class="app-card-title">Need more help?</h4>
+										</div><!--//col-->
+									</div><!--//row-->
+								</div><!--//app-card-header-->
+								<div class="app-card-body px-4">
+									<div class="intro mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquet eros vel diam semper mollis.</div>
+									<ul class="list-unstyled">
+										<li><strong>Tel:</strong> 0800 1234 5678</li>
+										<li><strong>Email:</strong> <a href="#">support@website.com</a></li>
+									</ul>
+								</div><!--//app-card-body-->
+								<div class="app-card-footer p-4 mt-auto">
+									<!-- Button that triggers the modal -->
+								<a class="btn app-btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#liveChatModal">Start Live Chat</a>
+
+								</div><!--//app-card-footer-->
+							</div><!--//app-card-->
+						</div><!--//col-->
+					</div><!--//row-->
+
+					<div class="modal fade" id="liveChatModal" tabindex="-1" aria-labelledby="liveChatModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="liveChatModalLabel">Live Chat Support</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="d-flex flex-column chat-window h-100">
+										<div class="chat-messages flex-grow-1 overflow-auto p-3 bg-light" id="chat-messages">
+											<!-- Messages will be dynamically injected here -->
+										</div>
+										<!-- Chat input -->
+										<div class="input-group mt-3">
+											<input type="text" id="chatInput" class="form-control" placeholder="Type a message..." aria-label="Type a message...">
+											<button class="btn btn-primary" type="button" id="sendMessageBtn">Send</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
+
 			    
 		    </div><!--//container-fluid-->
+			<?php include 'modals.php' ?>
 	    </div><!--//app-content-->
-	    <?php include 'components/footer.php' ?>
+	    
+		<?php include 'components/footer.php' ?>
+	  
     </div><!--//app-wrapper-->    					
 
- 
+ <script>
+						document.addEventListener("DOMContentLoaded", function () {
+							const chatMessagesElement = document.getElementById("chat-messages");
+							const chatInputElement = document.getElementById("chatInput");
+							const sendMessageBtn = document.getElementById("sendMessageBtn");
+							const userId = 101; // Replace with the actual user ID (dynamic value)
 
+							// Function to fetch chat history
+							async function fetchChatHistory() {
+								try {
+									const response = await fetch('/api/messages?user_id=' + userId); // API endpoint to fetch messages
+									const messages = await response.json();
+
+									chatMessagesElement.innerHTML = ''; // Clear previous messages
+									messages.forEach(message => {
+										const messageDiv = document.createElement('div');
+										messageDiv.classList.add('d-flex', 'mb-3');
+										const msgContent = message.reply ? message.reply : message.message; // Show reply if exists
+										messageDiv.innerHTML = `
+											<div class="p-2 ${message.user_id === userId ? 'bg-primary text-white' : 'bg-secondary text-white'} rounded-3">
+												${msgContent}
+											</div>
+										`;
+										chatMessagesElement.appendChild(messageDiv);
+									});
+
+									chatMessagesElement.scrollTop = chatMessagesElement.scrollHeight; // Scroll to the bottom
+								} catch (error) {
+									console.error("Error fetching chat history:", error);
+								}
+							}
+
+							// Function to send a message
+							async function sendMessage() {
+								const messageContent = chatInputElement.value.trim();
+								if (messageContent === '') return; // Prevent sending empty messages
+
+								try {
+									const response = await fetch('/api/messages', {
+										method: 'POST',
+										headers: {
+											'Content-Type': 'application/json',
+										},
+										body: JSON.stringify({
+											user_id: userId,
+											message: messageContent,
+											parent_id: null, // Set parent_id as null for top-level messages
+										}),
+									});
+
+									if (response.ok) {
+										chatInputElement.value = ''; // Clear input field
+										fetchChatHistory(); // Refresh chat history
+									} else {
+										console.error("Error sending message:", response.statusText);
+									}
+								} catch (error) {
+									console.error("Error sending message:", error);
+								}
+							}
+
+							// Event listeners
+							sendMessageBtn.addEventListener("click", sendMessage);
+							chatInputElement.addEventListener("keypress", function (event) {
+								if (event.key === 'Enter') {
+									sendMessage();
+								}
+							});
+
+							// Initial fetch of chat history when modal opens
+							$('#liveChatModal').on('show.bs.modal', fetchChatHistory);
+						});
+					</script>
+
+
+
+
+	<script>
+    // Clock Script
+    function updateTime() {
+        const clockElement = document.getElementById('clock');
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        clockElement.innerText = timeString;
+    }
+
+    // Update the time every second
+    setInterval(updateTime, 1000);
+    updateTime(); // Initial call
+	
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<?php include 'components/script.php'; ?>
 
 

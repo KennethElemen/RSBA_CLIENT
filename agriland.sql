@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2024 at 04:15 AM
+-- Generation Time: Oct 23, 2024 at 08:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,23 +44,56 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`address_id`, `user_id`, `region`, `province`, `city_municipality`, `barangay`, `street_number`, `purok`, `address_type`) VALUES
-(1, 1, '0300000000', '0304900000', '0304905000', '0304905048', 'asd', 'asdasd', 'home'),
-(2, 2, '0300000000', '0304900000', '0304905000', '0304905048', 'asd', 'asdasd', 'home'),
-(3, 3, 'Region VII (Central Visayas)', 'Cebu', 'Borbon', 'San Jose', 'da', '331231', 'home'),
-(4, 4, '', '', '', '', 'da', '331231', 'home'),
-(5, 5, '', '', '', '', 'da', '331231', 'home'),
-(6, 6, 'Region III (Central Luzon)', 'Nueva Ecija', 'Cuyapo', 'Calancuasan Sur', 'da', '123123', 'home'),
-(7, 7, 'Region VII (Central Visayas)', 'Cebu', 'Boljoon', 'Granada', 'asd', '1231', 'home'),
-(8, 8, '', '', '', '', '', '', 'home'),
-(9, 9, 'Region III (Central Luzon)', 'Nueva Ecija', 'Carranglan', 'Puncan', 'asd', '331231', 'home'),
-(10, 10, 'Region III (Central Luzon)', 'Bulacan', 'Obando', 'Panghulo', 'asd', '091239121', 'home'),
-(11, 11, 'Region III (Central Luzon)', 'Bulacan', 'Obando', 'Panghulo', 'asd', '091239121', 'home'),
-(12, 12, 'Region III (Central Luzon)', 'Bulacan', 'Obando', 'Panghulo', 'asd', '091239121', 'home'),
-(13, 13, 'Region III (Central Luzon)', 'Bulacan', 'Calumpit', 'Longos', 'asd', 'sdads', 'home'),
-(14, 14, 'Region III (Central Luzon)', 'Bataan', 'Morong', 'Binaritan', 'asd', '232131', 'home'),
-(15, 15, 'Region III (Central Luzon)', 'Bulacan', 'Hagonoy', 'San Pablo', 'sad', '123123', 'home'),
-(16, 16, 'Region III (Central Luzon)', 'Bulacan', 'Bustos', 'Malawak', 'asd', '12414', 'home'),
-(17, 17, 'Region III (Central Luzon)', 'Bulacan', 'City of Malolos ', 'Dakila', 'asd', '123123', 'home');
+(33, 33, 'MIMAROPA Region', 'Occidental Mindoro', 'Magsaysay', 'Lourdes', 'PUROK 3', '123', 'home'),
+(34, 34, 'Region VI (Western Visayas)', 'Antique', 'Patnongon', 'Igbobon', 'asda', 'asdasd', 'home'),
+(35, 35, 'Region III (Central Luzon)', 'Nueva Ecija', 'Jaen', 'Pakol', '889', '89u696', 'home'),
+(39, 43, 'Region X (Northern Mindanao)', 'Camiguin', 'Guinsiliban', 'Liong', 'asdasd', 'asd', 'home'),
+(40, 44, 'Region X (Northern Mindanao)', 'Camiguin', 'Guinsiliban', 'Liong', 'asdasd', 'asd', 'home'),
+(41, 45, 'Region X (Northern Mindanao)', 'Camiguin', 'Guinsiliban', 'Liong', 'asdasd', 'asd', 'home'),
+(42, 46, 'Region X (Northern Mindanao)', 'Lanao del Norte', 'Magsaysay', 'Paclolo', 'asdas', 'dasdsd', 'home'),
+(43, 47, 'Region X (Northern Mindanao)', 'Lanao del Norte', 'Magsaysay', 'Paclolo', 'asdas', 'dasdsd', 'home'),
+(44, 48, 'Region VI (Western Visayas)', 'Antique', 'Patnongon', 'Igbobon', 'asd', 'asds', 'home'),
+(47, 51, 'Region VIII (Eastern Visayas)', 'Leyte', 'Inopacan', 'Marao', 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'home'),
+(48, 52, 'Region VIII (Eastern Visayas)', 'Leyte', 'Inopacan', 'Marao', 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'home'),
+(49, 53, 'Region VIII (Eastern Visayas)', 'Leyte', 'Inopacan', 'Marao', 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'home'),
+(51, 55, 'Region IX (Zamboanga Peninsula)', 'Zamboanga del Norte', 'Sibutad', 'Sibuloc', 'asda', 'asdas', 'home'),
+(52, 56, 'Region XIII (Caraga)', 'Agusan del Sur', 'Santa Josefa', 'San Jose', '131', '231', 'home'),
+(53, 57, 'Region XIII (Caraga)', 'Agusan del Sur', 'Santa Josefa', 'San Jose', '131', '231', 'home'),
+(54, 58, 'Region XI (Davao Region)', 'Davao del Norte', 'Santo Tomas', 'Narvacan', '123', '123123', 'home'),
+(55, 59, 'Region XI (Davao Region)', 'Davao del Norte', 'Santo Tomas', 'Narvacan', '123', '123123', 'home');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE `announcements` (
+  `announcement_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `expiration_date` date DEFAULT NULL,
+  `status` enum('active','inactive','expired') DEFAULT 'active',
+  `attachment_url` varchar(255) DEFAULT NULL,
+  `posted_by` int(11) DEFAULT NULL,
+  `role` enum('admin','staff') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `announcements` (`announcement_id`, `title`, `content`, `created_at`, `updated_at`, `expiration_date`, `status`, `attachment_url`, `posted_by`, `role`) VALUES
+(42, 'Juslie', 'asedasdASD', '2024-10-11 13:42:17', '2024-10-11 13:42:17', '2024-10-11', 'active', '../assets/images/announcement/ACE MEETING BACKGROUND.png', 33, 'admin'),
+(43, 'Juslie', 'asedasdASD', '2024-10-11 13:42:41', '2024-10-11 13:42:41', '2024-10-11', 'active', '../assets/images/announcement/ACE MEETING BACKGROUND.png', 33, 'admin'),
+(44, 'Juslie', 'asedasdASD', '2024-10-11 13:42:49', '2024-10-11 13:42:49', '2024-10-11', 'active', '../assets/images/announcement/ACE MEETING BACKGROUND.png', 33, 'admin'),
+(45, 'testing oct 12', 'daasd', '2024-10-12 13:00:45', '2024-10-12 13:00:45', '2024-10-12', 'active', '../assets/images/announcement/Logo.jpg', 33, 'admin'),
+(46, 'testing oct 12', 'daasd', '2024-10-12 13:02:38', '2024-10-12 13:02:38', '2024-10-12', 'active', '../assets/images/announcement/Logo.jpg', 33, 'admin'),
+(47, 'testing oct 12', 'daasd', '2024-10-12 13:02:42', '2024-10-12 13:02:42', '2024-10-12', 'active', '../assets/images/announcement/Logo.jpg', 33, 'admin'),
+(50, 'testing announcement Staff', 'Staff staff', '2024-10-12 13:55:09', '2024-10-12 13:55:09', '2024-10-12', 'active', NULL, 35, 'staff'),
+(54, 'Testing october 21', 'asdasdasdasdadasdasd', '2024-10-23 05:57:31', '2024-10-23 05:57:31', '2024-10-23', 'active', '../assets/images/announcement/Planet9_3840x2160.jpg', 35, 'staff');
 
 -- --------------------------------------------------------
 
@@ -72,48 +105,53 @@ CREATE TABLE `contacts` (
   `contact_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
-  `contact_type` enum('personal','emergency') NOT NULL
+  `contact_type` enum('personal','emergency') NOT NULL,
+  `emergency_ContactName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contacts`
 --
 
-INSERT INTO `contacts` (`contact_id`, `user_id`, `phone_number`, `contact_type`) VALUES
-(1, 1, '1231', 'personal'),
-(2, 1, '09129305198', 'emergency'),
-(3, 2, '1231', 'personal'),
-(4, 2, '09129305198', 'emergency'),
-(5, 3, '2313', 'personal'),
-(6, 3, '132123', 'emergency'),
-(7, 4, '2313', 'personal'),
-(8, 4, '132123', 'emergency'),
-(9, 5, '2313', 'personal'),
-(10, 5, '132123', 'emergency'),
-(11, 6, '123414', 'personal'),
-(12, 6, '09129305198', 'emergency'),
-(13, 7, '12312', 'personal'),
-(14, 7, '1231232', 'emergency'),
-(15, 8, '', 'personal'),
-(16, 8, '', 'emergency'),
-(17, 9, '091239121', 'personal'),
-(18, 9, '091239121', 'emergency'),
-(19, 10, '091239121', 'personal'),
-(20, 10, '091239121', 'emergency'),
-(21, 11, '091239121', 'personal'),
-(22, 11, '091239121', 'emergency'),
-(23, 12, '091239121', 'personal'),
-(24, 12, '091239121', 'emergency'),
-(25, 13, '12312', 'personal'),
-(26, 13, '12312', 'emergency'),
-(27, 14, '2131231', 'personal'),
-(28, 14, '123123', 'emergency'),
-(29, 15, '12314', 'personal'),
-(30, 15, '12412', 'emergency'),
-(31, 16, '124124', 'personal'),
-(32, 16, '124142', 'emergency'),
-(33, 17, '12341', 'personal'),
-(34, 17, '12414', 'emergency');
+INSERT INTO `contacts` (`contact_id`, `user_id`, `phone_number`, `contact_type`, `emergency_ContactName`) VALUES
+(57, 29, '12314', 'personal', ''),
+(58, 29, '123123', 'emergency', ''),
+(65, 33, '12312312', 'personal', ''),
+(66, 33, '1231231', 'emergency', ''),
+(67, 34, '1241412', 'personal', ''),
+(68, 34, '123123', 'emergency', ''),
+(77, 43, '1231231', 'personal', ''),
+(78, 43, '23123', 'emergency', ''),
+(79, 44, '1231231', 'personal', ''),
+(80, 44, '23123', 'emergency', ''),
+(81, 45, '1231231', 'personal', ''),
+(82, 45, '23123', 'emergency', ''),
+(83, 46, '131231231', 'personal', ''),
+(84, 46, '23123123', 'emergency', ''),
+(85, 47, '131231231', 'personal', ''),
+(86, 47, '23123123', 'emergency', ''),
+(87, 48, '123132', 'personal', ''),
+(88, 48, '1312', 'emergency', ''),
+(89, 49, '123123', 'personal', ''),
+(90, 49, '123123', 'emergency', ''),
+(91, 50, '123123', 'personal', ''),
+(92, 50, '123', 'emergency', ''),
+(93, 51, '123123', 'personal', ''),
+(94, 53, '123123', 'personal', ''),
+(95, 54, '123123', 'personal', ''),
+(96, 54, '123123', 'emergency', 'Testing Emergency Contactname'),
+(97, 55, '921323', 'personal', ''),
+(98, 55, '12381923', 'emergency', ''),
+(99, 56, '123123', 'personal', ''),
+(100, 56, '12312', 'emergency', ''),
+(101, 57, '123123', 'personal', ''),
+(102, 57, '12312', 'emergency', ''),
+(103, 58, '123123', 'personal', ''),
+(104, 58, '1231231', 'emergency', ''),
+(105, 59, '123123', 'personal', ''),
+(106, 59, '1231231', 'emergency', ''),
+(107, 60, 'asdas', 'personal', ''),
+(108, 60, 'asda', 'emergency', '');
 
 -- --------------------------------------------------------
 
@@ -135,23 +173,13 @@ CREATE TABLE `crops` (
 --
 
 INSERT INTO `crops` (`reference`, `crop_id`, `user_id`, `crop_name`, `crop_area_hectares`, `benefits`) VALUES
-(0, 1, 1, 'Palay/Rice', 1231.00, NULL),
-(0, 2, 2, 'Palay/Rice', 1231.00, NULL),
-(0, 3, 3, 'Corn', 12312.00, NULL),
-(0, 4, 4, 'Corn', 12312.00, NULL),
-(0, 5, 5, 'Corn', 12312.00, NULL),
-(0, 6, 6, 'Mungbean', 231.00, 'Pending'),
-(0, 7, 7, 'Onion', 123123.00, 'Pending'),
-(0, 8, 8, '', 0.00, 'Pending'),
-(0, 9, 9, 'Corn', 123.00, 'Pending'),
-(0, 10, 10, 'Corn', 123.00, 'Pending'),
-(0, 11, 11, 'Corn', 123.00, 'Pending'),
-(0, 12, 12, 'Corn', 123.00, 'Pending'),
-(15543306, 13, 13, 'Palay/Rice', 1231.00, 'Pending'),
-(68170509, 14, 14, 'corn', 3123.00, 'Pending'),
-(24411066, 15, 15, 'Corn', 1231.00, 'Pending'),
-(44326085, 16, 16, 'Corn', 12.00, 'Pending'),
-(47895949, 17, 17, 'Corn', 12.00, 'Pending');
+(46946233, 29, 29, 'Corn', 123123.00, 'Pending'),
+(96421995, 33, 33, 'Mungbean', 12.00, 'qualified'),
+(84951524, 34, 34, 'Mungbean', 1.00, 'qualified'),
+(25925279, 35, 35, 'Garlic', 8.00, 'qualified'),
+(61798865, 36, 49, 'Corn', 12.00, 'Pending'),
+(27741075, 37, 50, 'Corn', 123.00, 'Pending'),
+(96298857, 38, 54, 'Corn', 12312.00, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -170,23 +198,30 @@ CREATE TABLE `jobroles` (
 --
 
 INSERT INTO `jobroles` (`job_id`, `user_id`, `job_role`) VALUES
-(1, 1, 'farmworker'),
-(2, 2, 'farmworker'),
-(3, 3, 'farmworker'),
-(4, 4, 'farmworker'),
-(5, 5, 'farmworker'),
-(6, 6, 'fisherfolk'),
-(7, 7, 'farmworker'),
-(8, 8, 'farmer'),
-(9, 9, 'farmworker'),
-(10, 10, 'farmworker'),
-(11, 11, 'farmworker'),
-(12, 12, 'farmworker'),
-(13, 13, 'farmworker'),
-(14, 14, 'farmworker'),
-(15, 15, 'farmworker'),
-(16, 16, 'farmworker'),
-(17, 17, 'farmworker');
+(29, 29, 'farmworker'),
+(33, 33, 'farmworker'),
+(34, 34, 'farmworker'),
+(35, 35, 'farmworker'),
+(36, 49, 'farmworker'),
+(37, 50, 'fisherfolk'),
+(38, 54, 'farmworker');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `reply` text DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `status` enum('sent','replied','closed') DEFAULT 'sent',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -208,18 +243,15 @@ CREATE TABLE `useraccounts` (
 --
 
 INSERT INTO `useraccounts` (`account_id`, `user_id`, `email`, `password`, `accountStatus`, `role`) VALUES
-(1, 1, 'Kennethelemen31@gmail.com', '$2y$10$YtP8jPR94Ip3AXlAIfgjWe4AUIahkaWePMU2Q9xSeDWQJVqk/ME5W', NULL, ''),
-(3, 3, 'kenneth2131@gmail.com', '$2y$10$n7bzLr/vnhwpDI08TA3kXe/QJw4my4oU/VovdMjbiTIn3JqtCKVTy', NULL, ''),
-(6, 6, 'Kennethelemen3223121@gmail.com', '$2y$10$s2DX0mZ/3fu5NOhEc/biXO3H83k82LS.bUd/gIa7RHgjcEDKKoX9S', 'Pending', 'user'),
-(7, 7, 'n312@gmail.com', '$2y$10$XsHj9.4a9MQppguVoDE6DulUHsGoycuB6iRgwvU1Z9XxzqALEGJQ2', 'Pending', 'user'),
-(8, 8, 'n31@gmail.com', '$2y$10$LXEWmMHAQIBsRC1U0G6lTeswqcBT8Kc/JHk8kMrlGelJMkfoDlyZW', 'Pending', 'user'),
-(9, 9, 'julieroseassssssguilar@gmail.com', '$2y$10$as4qV5IweZZ0DgWwdCib.ethosFwh9PrDRQDhxSPhEPuOBPaLHb0C', 'Pending', 'user'),
-(10, 10, '091239121@gmail.com', '$2y$10$IfiDhcpKBxBOwT3u2Gxza.tdb8t3eiR5IZnLujABf0apR5J6X8O22', 'Pending', 'user'),
-(13, 13, 'Kenneasdasdthelemen31@gmail.com', '$2y$10$KUIutmAr4q8VkJCCUIvvpuqKvmiKKElxWud7sQrrchn8tMlEmqtya', 'Pending', 'user'),
-(14, 14, '', '$2y$10$MmjwcyQNBp2.Y1wPpIkwUOrTDNwTs75Qexyl03RAmz0cdY.0yM2w2', 'Pending', 'user'),
-(15, 15, 'staff123@gmail.com', '$2y$10$.Dz4CHuGmAeDvWLwCkMRj.9khqxeaITitqIS0w.JHOap7o3om304i', 'Pending', 'staff'),
-(16, 16, 'admin123@gmail.com', '$2y$10$5WcwqlbaQxCWbBXYYgYMBOPPDosUK9wRkYhoorbKovA1wxKuQ9Qne', 'Pending', 'admin'),
-(17, 17, 'user@gmail.com', '$2y$10$mJip5J5vvUDV8G.ODJq33u9Scsqx0KuVAow60OOa/DuuLiKpeLRb.', 'Pending', 'user');
+(33, 33, 'admin@gmail.com', '$2y$10$dqx79ViPmMILwKX3eK.zJevcjtqCxpL46nDisX582MbkxgqUz5V/2', 'accepted', 'admin'),
+(34, 34, 'Kennethelemen31@gmail.com', '$2y$10$DClCKnLPp4fwotyEYGJUk.Xyd2hwkUh5MorHorgZkbTykVsXPJcsy', 'accepted', 'user'),
+(35, 35, 'staff@gmail.com', '$2y$10$PYkc7lEsjsUWYUz2fN8lpuJkWqXexh5kyYBas6Ms.vmX16koHuFUK', 'accepted', 'staff'),
+(39, 43, 'asd@gmail.com', '$2y$10$46nyY.pS.1XMGyB65HlvjeLkcSE0scUARP.ezTjhHReGkm.sO/wN6', 'Pending', 'staff'),
+(42, 46, 'asdasd@gmail.com', '$2y$10$.njseaBSBtp0UrpAOPUokuRPpsO1KU0ljZoHyjrRG7Nq.za/RKxRS', 'accepted', 'staff'),
+(44, 48, 'user12asdas3@gmail.com', '$2y$10$cdf26yw55vavDCN5Njqa.emi/6Vu3btXk1bmpN2eJEIdDhNS39O..', 'accepted', 'staff'),
+(48, 55, 'kj@gmail.com', '$2y$10$oTKjMvHR.VFErQ1zD8iUP.EZrwSYG8gvs1GWj/cWaDGDEKggvIj6e', 'accepted', 'staff'),
+(49, 56, 'asdasd213@gmail.com', '$2y$10$JJbaw1pa3m2HPYyCO3E/WuaYRMAu/IghQfcfQqDPFH68Y2s2lUcwe', 'accepted', 'staff'),
+(51, 58, 'sdasda@gmail.comsasd', '$2y$10$P7HkOX/ABz9GOtqHBQK2CeC6TWV8Gk4ynuTknH4504iG/4MovwYxm', 'accepted', 'staff');
 
 -- --------------------------------------------------------
 
@@ -244,23 +276,28 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `middle_name`, `sur_name`, `sex`, `date_of_birth`, `birth_municipality`, `birth_province`, `profile_picture`) VALUES
-(1, 'asd', 'asda', 'sdasd', 'male', '2024-09-13', 'adsda', 'dsasd', ''),
-(2, 'asd', 'asda', 'sdasd', 'male', '2024-09-13', 'adsda', 'dsasd', ''),
-(3, 'asdasdasd', 'dasdasd', 'asdasd', 'male', '2024-09-07', '1231', '2312312', ''),
-(4, 'asdasdasd', 'dasdasd', 'asdasd', 'male', '2024-09-07', '1231', '2312312', ''),
-(5, 'asdasdasd', 'dasdasd', 'asdasd', 'male', '2024-09-07', '1231', '2312312', ''),
-(6, 'testing', 'asda', 'asdasd', 'male', '2024-09-08', 'asd', '1213', ''),
-(7, 'asd', 'asd', 'asdasd', 'female', '2024-09-15', '12312', '3132', ''),
-(8, 'asdasd', '', '', '', '0000-00-00', '', '', ''),
-(9, 'kenneth ', 's', 'Elemen', 'male', '2024-09-19', 'adsda', 'asda', ''),
-(10, 'elemen', 'sdasd', 'asdasd', 'male', '2024-09-20', '091239121', '091239121', ''),
-(11, 'elemen', 'sdasd', 'asdasd', 'male', '2024-09-20', '091239121', '091239121', ''),
-(12, 'elemen', 'sdasd', 'asdasd', 'male', '2024-09-20', '091239121', '091239121', ''),
-(13, 'kenenth', 'asdasd', 'asdasd', 'male', '2024-09-20', 'asda', 'sdadsa', ''),
-(14, 'asdasd', 'asd', 'asd', 'male', '2024-09-11', '3123', '1231231', ''),
-(15, 'staff', 'staff', 'staff', 'male', '2024-09-19', '12312', '1213', ''),
-(16, 'admin', 'admin', 'asd', 'male', '2024-09-15', '123123', '142124', ''),
-(17, 'user', 'user', 'user', 'male', '2024-09-12', '1231', '32123', '');
+(29, 'sad23', 'aasd12', '12123', 'male', '2024-09-14', 'Orion', 'Bataan', '../../RSBSA/assets/images/profiles/profile_29.png'),
+(33, 'admin', 'admin', '123', 'male', '2024-09-15', 'Dupax del Sur', 'Nueva Vizcaya', '../../RSBSA/assets/images/profiles/profile_33.png'),
+(34, 'kenneth', 'kenneth', 'asdasd', 'male', '2024-09-20', 'Masantol', 'Pampanga', '../../RSBSA/assets/images/profiles/profile_34.png'),
+(35, 'Staff', 'Staff', 'Staff', 'male', '2024-09-21', 'Kasibu', 'Nueva Vizcaya', '../../RSBSA/assets/images/profiles/profile_35.jpg'),
+(43, 'asdasd', 'asd', 'asda', 'male', '2024-08-28', 'Laur', 'Nueva Ecija', NULL),
+(44, 'asdasd', 'asd', 'asda', 'male', '2024-08-28', 'Laur', 'Nueva Ecija', NULL),
+(45, 'asdasd', 'asd', 'asda', 'male', '2024-08-28', 'Laur', 'Nueva Ecija', NULL),
+(46, 'dasda', 'sdasdasd', 'asdasd', 'female', '2024-09-11', 'Morong', 'Bataan', NULL),
+(47, 'dasda', 'sdasdasd', 'asdasd', 'female', '2024-09-11', 'Morong', 'Bataan', NULL),
+(48, 'Sasdaasd', 'asdasd', 'asdads', 'male', '2024-09-04', 'General Mamerto Natividad', 'Nueva Ecija', NULL),
+(49, 'asd', 'asd', 'asd', 'male', '2024-09-15', 'Minalin', 'Pampanga', '../../RSBSA/assets/images/profiles/profile_49.png'),
+(50, 'testingnga ngaun', 'asda', 'asdas', 'male', '2024-10-18', 'Pandi', 'Bulacan', '../../RSBSA/assets/images/profiles/profile_50.png'),
+(51, 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'male', '2024-10-16', 'Pandi', 'Bulacan', '../../RSBSA/assets/images/profiles/profile_51.png'),
+(52, 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'male', '2024-10-16', 'Pandi', 'Bulacan', '../../RSBSA/assets/images/profiles/profile_52.png'),
+(53, 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'male', '2024-10-16', 'Pandi', 'Bulacan', '../../RSBSA/assets/images/profiles/profile_53.png'),
+(54, 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'Testing Emergency Contactname', 'male', '2024-10-16', 'Pandi', 'Bulacan', '../../RSBSA/assets/images/profiles/profile_54.png'),
+(55, 'Kenneth', 'asda', 'asd', 'male', '2024-11-07', 'San Marcelino', 'Zambales', NULL),
+(56, 'asd', 'asd', 'asd', 'male', '2024-10-10', 'Bagulin', 'La Union', '../assets/images/profiles/profile_670a8639c91eb1.43945429.jpg'),
+(57, 'asd', 'asd', 'asd', 'male', '2024-10-10', 'Bagulin', 'La Union', '../assets/images/profiles/profile_57.jpg'),
+(58, 'asd', 'asda', 'sdasd', 'male', '2024-10-10', 'General Mamerto Natividad', 'Nueva Ecija', '../assets/images/profiles/profile_58.jpg'),
+(59, 'asd', 'asda', 'sdasd', 'male', '2024-10-10', 'General Mamerto Natividad', 'Nueva Ecija', '../assets/images/profiles/profile_59.jpg'),
+(60, 'asd', 'asd', 'asdas', 'male', '2024-10-16', 'San Manuel', 'Tarlac', '../assets/images/profiles/profile_60.png');
 
 --
 -- Indexes for dumped tables
@@ -272,6 +309,13 @@ INSERT INTO `users` (`user_id`, `first_name`, `middle_name`, `sur_name`, `sex`, 
 ALTER TABLE `addresses`
   ADD PRIMARY KEY (`address_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `announcements`
+--
+ALTER TABLE `announcements`
+  ADD PRIMARY KEY (`announcement_id`),
+  ADD KEY `posted_by` (`posted_by`);
 
 --
 -- Indexes for table `contacts`
@@ -295,6 +339,14 @@ ALTER TABLE `jobroles`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `parent_id` (`parent_id`);
+
+--
 -- Indexes for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
@@ -316,37 +368,49 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `announcements`
+--
+ALTER TABLE `announcements`
+  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `crops`
 --
 ALTER TABLE `crops`
-  MODIFY `crop_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `crop_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `jobroles`
 --
 ALTER TABLE `jobroles`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `useraccounts`
 --
 ALTER TABLE `useraccounts`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Constraints for dumped tables
@@ -357,6 +421,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `addresses`
   ADD CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `announcements`
+--
+ALTER TABLE `announcements`
+  ADD CONSTRAINT `announcements_ibfk_1` FOREIGN KEY (`posted_by`) REFERENCES `useraccounts` (`user_id`);
 
 --
 -- Constraints for table `contacts`
@@ -375,6 +445,13 @@ ALTER TABLE `crops`
 --
 ALTER TABLE `jobroles`
   ADD CONSTRAINT `jobroles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `useraccounts` (`user_id`),
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`parent_id`) REFERENCES `messages` (`id`);
 
 --
 -- Constraints for table `useraccounts`

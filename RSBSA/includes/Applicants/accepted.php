@@ -42,7 +42,8 @@ LEFT JOIN
 LEFT JOIN 
     contacts co ON ua.user_id = co.user_id
 WHERE 
-    ua.accountStatus IN ('accepted') 
+    ua.accountStatus = 'accepted'
+    AND ua.role = 'user'  -- Filter to include only users with role 'user'
 GROUP BY 
     ua.user_id, ua.email, ua.accountStatus, ua.account_id, u.first_name, u.middle_name, u.sur_name, u.date_of_birth
 LIMIT $limit_paid OFFSET $offset_paid"; // Corrected pagination variables
@@ -122,7 +123,7 @@ if ($result_paid->num_rows > 0) {
 }
 
 // Calculate total pages for 'accepted' users in Paid Orders Tab
-$totalResult_paid = $dbConnection->query("SELECT COUNT(*) as total FROM useraccounts WHERE accountStatus = 'accepted'");
+$totalResult_paid = $dbConnection->query("SELECT COUNT(*) as total FROM useraccounts WHERE accountStatus = 'accepted' AND role = 'user'");
 $totalRecords_paid = $totalResult_paid->fetch_assoc()['total'];
 $totalPages_paid = ceil($totalRecords_paid / $limit_paid);
 ?>

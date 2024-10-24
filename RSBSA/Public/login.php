@@ -117,67 +117,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $dbConnection->close();
 ?>
 
-    <div class="row g-0 app-auth-wrapper">
-		<div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5 mx-auto d-flex justify-content-center align-items-center h-100" >
-			<div class="d-flex flex-column align-content-center">
-				<div class="app-auth-body mx-auto">    
-					<div class="app-auth-branding mb-4">
-						<a class="app-logo" href="index.html">
-							<img class="logo-icon me-2" src="../assets/images/sane_logo.png" alt="logo">
-						</a>
-					</div>
-					<h2 class="auth-heading text-center mb-5">Log in to Portal</h2>
-					<div class="auth-form-container text-start">
-					<form class="auth-form login-form" method="POST" action="">         
-							<div class="email mb-3">
-								<label class="sr-only" for="signin-email">Email</label>
-								<input id="signin-email" name="email" type="email" class="form-control signin-email" placeholder="Email address" required="required">
-							</div>
-							<div class="password mb-3">
-								<label class="sr-only" for="signin-password">Password</label>
-								<input id="signin-password" name="password" type="password" class="form-control signin-password" placeholder="Password" required="required">
-								<div class="extra mt-3 row justify-content-between">
-									<div class="col-6">
-										
-									</div>
-									<div class="col-6">
-										<div class="forgot-password text-end">
-											<a href="reset-password.php">Forgot password?</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="text-center">
-								<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Log In</button>
-							</div>
-						</form>
-                        <div class="auth-option text-center pt-5">
-                            No Account? Sign up <a class="text-link" href="../../registration/colorlib-wizard-14/register.php" target="_blank" rel="noopener noreferrer">here</a>.
-                        </div>
+<div class="row g-0 app-auth-wrapper position-relative" style="height: 100vh;">
+        <!-- Background Section -->
+        <div class="col-12 auth-background-col position-absolute top-0 start-0 h-100 w-100" style="z-index: 1;">
+            <div class="auth-background-holder"></div>
+            <div class="auth-background-mask" style="backdrop-filter: blur(10px);"></div>
+            <div class="auth-background-overlay"></div>
+        </div>
 
-					</div>    
-				</div>
-				<footer class="app-auth-footer">
-					<div class="container text-center py-3">
-						
-					</div>
-				</footer>
-			</div>   
-		</div>
-		
-	    <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
-		    <div class="auth-background-holder">
-		    </div>
-		    <div class="auth-background-mask"></div>
-		    <div class="auth-background-overlay p-3 p-lg-5">
-			    <div class="d-flex flex-column align-content-end h-100">
-				    <div class="h-100"></div>
-				    
-				</div>
-		    </div><!--//auth-background-overlay-->
-	    </div><!--//auth-background-col-->
     
-    </div><!--//row-->
+    <!-- Login Form Section -->
+    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center mx-auto d-flex justify-content-center align-items-center h-100" style="z-index: 10;">
+        <div class="d-flex flex-column align-items-center" style="width: 100%; max-width: 500px;">
+            <div class="app-auth-body mx-auto bg-white p-5 rounded shadow" style="width: 100%;">
+                <div class="app-auth-branding mb-4">
+                    <a class="app-logo" href="index.html">
+                        <img class="logo-icon me-2" src="../assets/images/sane_logo.png" alt="logo">
+                    </a>
+                </div>
+                <h2 class="auth-heading text-center mb-5">Log in to Portal</h2>
+                <div class="auth-form-container text-start">
+                    <form class="auth-form login-form" method="POST" action="">
+                        <div class="email mb-3">
+                            <label class="sr-only" for="signin-email">Email</label>
+                            <input id="signin-email" name="email" type="email" class="form-control signin-email" placeholder="Email address" required="required">
+                        </div>
+                        <div class="password mb-3">
+                            <label class="sr-only" for="signin-password">Password</label>
+                            <input id="signin-password" name="password" type="password" class="form-control signin-password" placeholder="Password" required="required">
+                            <div class="extra mt-3 row justify-content-between">
+                                <div class="col-6"></div>
+                                <div class="col-6">
+                                    <div class="forgot-password text-end">
+                                        <a href="reset-password.php">Forgot password?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Log In</button>
+                        </div>
+                    </form>
+                    <div class="auth-option text-center pt-5">
+                        No Account? Sign up <a class="text-link" href="../../registration/colorlib-wizard-14/register.php" target="_blank" rel="noopener noreferrer">here</a>.
+                    </div>
+                </div>
+            </div>
+            <footer class="app-auth-footer">
+                <div class="container text-center py-3"></div>
+            </footer>
+        </div>
+    </div>
+</div>
+
 
 	
 </body>

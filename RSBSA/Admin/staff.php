@@ -173,7 +173,7 @@ $dbConnection->close();
                                 </tr>
                             </thead>
                             <tbody>
-                              <?php include '../includes/Staff/allstaff.php'?>
+                              <?php include '../includes/Applicants/allstaff.php'?>
                             </tbody> 
                         </table>
                     </div><!--//table-responsive-->
@@ -226,18 +226,8 @@ $dbConnection->close();
             </div>
             <div class="modal-body">
                 <div class="row g-4 justify-content-center">
-
-                <div class="col-lg-4 text-center">
-                    <label for="profile_picture">
-                        <img id="modal-profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture" class="rounded-circle img-fluid border border-primary" style="width: 40vh; cursor: pointer;">
-                    </label>
-                    <input type="file" id="profile_picture" name="profile_picture" accept=".jpeg, .jpg, .png" style="display: none;" onchange="previewImage(event)">
-                    <small class="text-muted d-block">Click the image to upload a profile picture</small>
-                    <div id="image-error" class="text-danger" style="display: none;"></div>
-                </div>
-
-                    <!-- Staff Information Card -->
-                    <div class="col-lg-8">
+                    <!-- StaffInformation Card -->
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header bg-primary text-white">
                                 <strong>Staff Information</strong>
@@ -245,57 +235,72 @@ $dbConnection->close();
                             <div class="card-body">
                                 <form id="createStaffForm" method="POST" enctype="multipart/form-data" action="">
                                     <div class="row g-3">
-                                        <div class="col-md-4">
-                                            <label for="first_name" class="form-label">First Name</label>
-                                            <input type="text" class="form-control" name="first_name" required>
+                                        <!-- Profile Picture Section -->
+                                        <div class="col-lg-4 d-flex flex-column align-items-start">
+                                            <label for="profile_picture" class="text-center mb-2">
+                                                <img id="modal-profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture" class="rounded-circle img-fluid border border-primary" style="width: 40vh; cursor: pointer;">
+                                            </label>
+                                            <input type="file" id="profile_picture" name="profile_picture" accept=".jpeg, .jpg, .png" style="display: none;" onchange="previewImage(event)">
+                                            <small class="text-muted">Click the image to upload a profile picture</small>
+                                            <div id="image-error" class="text-danger" style="display: none;"></div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="middle_name" class="form-label">Middle Name</label>
-                                            <input type="text" class="form-control" name="middle_name" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="sur_name" class="form-label">Surname</label>
-                                            <input type="text" class="form-control" name="sur_name" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="password" class="form-label">Password</label>
-                                            <input type="password" class="form-control" name="password" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="number" class="form-label">Personal Phone Number</label>
-                                            <input type="tel" class="form-control" name="number" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="emergencyNumber" class="form-label">Emergency Phone Number</label>
-                                            <input type="tel" class="form-control" name="emergencyNumber" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="sex" class="form-label">Sex</label>
-                                            <select name="sex" class="form-control" required>
-                                                <option value="">Select Sex</option>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dateOfBirth" class="form-label">Date of Birth</label>
-                                            <input type="date" class="form-control" name="dateOfBirth" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="birthProvince" class="form-label">Birth Province</label>
-                                            <select name="birthProvince" id="birthProvince" class="form-control" required>
-                                                <option value="">PROVINCE</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="birthMunicipality" class="form-label">Birth Municipality</label>
-                                            <select name="birthMunicipality" id="birthMunicipality" class="form-control" required>
-                                                <option value="">CITY/MUNICIPALITY</option>
-                                            </select>
+
+                                        <!-- Other Input Fields -->
+                                        <div class="col-lg-8">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <label for="first_name" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" name="first_name" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="middle_name" class="form-label">Middle Name</label>
+                                                    <input type="text" class="form-control" name="middle_name" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="sur_name" class="form-label">Surname</label>
+                                                    <input type="text" class="form-control" name="sur_name" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="email" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="email" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="password" class="form-label">Password</label>
+                                                    <input type="password" class="form-control" name="password" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="number" class="form-label">Personal Phone Number</label>
+                                                    <input type="tel" class="form-control" name="number" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="emergencyNumber" class="form-label">Emergency Phone Number</label>
+                                                    <input type="tel" class="form-control" name="emergencyNumber" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="sex" class="form-label">Sex</label>
+                                                    <select name="sex" class="form-control" required>
+                                                        <option value="">Select Sex</option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                                                    <input type="date" class="form-control" name="dateOfBirth" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="birthProvince" class="form-label">Birth Province</label>
+                                                    <select name="birthProvince" id="birthProvince" class="form-control" required>
+                                                        <option value="">PROVINCE</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="birthMunicipality" class="form-label">Birth Municipality</label>
+                                                    <select name="birthMunicipality" id="birthMunicipality" class="form-control" required>
+                                                        <option value="">CITY/MUNICIPALITY</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                             </div>
@@ -346,18 +351,19 @@ $dbConnection->close();
                             </div>
                         </div>
                     </div>
-
-                    </form>
+                </form>
                 </div>
             </div>
             <div class="modal-footer border-0 d-flex justify-content-between">
-                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" form="createStaffForm" onclick="validateForm()">Create Staff</button>
-               
             </div>
         </div>
     </div>
 </div>
+
+
+<?php include 'modals.php'; ?>
 <script>
     function previewImage(event) {
         const file = event.target.files[0];
@@ -450,127 +456,132 @@ $dbConnection->close();
 </script>
 
 <script>
-   document.addEventListener("DOMContentLoaded", function () {
-    const birthProvinceSelect = document.getElementById('birthProvince');
-    const birthMunicipalitySelect = document.getElementById('birthMunicipality');
-    const provinceUrl = 'https://psgc.cloud/api/provinces';
+        document.addEventListener("DOMContentLoaded", function () {
+            const birthProvinceSelect = document.getElementById('birthProvince');
+            const birthMunicipalitySelect = document.getElementById('birthMunicipality');
+            const provinceUrl = 'https://psgc.cloud/api/provinces';
 
-    // Function to show loading indicator
-    function showLoadingIndicator() {
-        const loadingIndicator = document.createElement('div');
-        loadingIndicator.textContent = 'Loading...';
-        loadingIndicator.id = 'loadingIndicator';
-        document.body.appendChild(loadingIndicator);
-    }
+            // Function to show loading indicator
+            function showLoadingIndicator() {
+                const loadingIndicator = document.createElement('div');
+                loadingIndicator.textContent = 'Loading...';
+                loadingIndicator.id = 'loadingIndicator';
+                document.body.appendChild(loadingIndicator);
+            }
 
-    // Function to hide loading indicator
-    function hideLoadingIndicator() {
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        if (loadingIndicator) loadingIndicator.remove();
-    }
+            // Function to hide loading indicator
+            function hideLoadingIndicator() {
+                const loadingIndicator = document.getElementById('loadingIndicator');
+                if (loadingIndicator) loadingIndicator.remove();
+            }
 
-    // Fetch provinces on page load
-    fetch(provinceUrl)
-        .then(response => {
-            showLoadingIndicator();
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            return response.json();
-        })
-        .then(data => {
-            hideLoadingIndicator();
-            birthProvinceSelect.innerHTML = '<option value="">PROVINCE</option>'; // Clear previous options
-            data.forEach(province => {
-                const option = document.createElement('option');
-                option.value = province.name; // Set the value to the province name
-                option.textContent = province.name; // Display the province name
-                birthProvinceSelect.appendChild(option);
-            });
-        })
-        .catch(error => {
-            hideLoadingIndicator();
-            console.error('Error fetching provinces:', error);
-        });
-
-    // Fetch municipalities when a province is selected
-    birthProvinceSelect.addEventListener('change', function() {
-        const selectedProvince = this.value;
-        birthMunicipalitySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>'; // Clear previous options
-
-        if (selectedProvince) {
-            // You may need to adjust this URL based on your actual API endpoint for cities
-            const citiesUrl = `https://psgc.cloud/api/provinces/${selectedProvince}/cities-municipalities`;
-
-            fetch(citiesUrl)
+            // Fetch provinces on page load
+            fetch(provinceUrl)
                 .then(response => {
+                    showLoadingIndicator();
                     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                     return response.json();
                 })
                 .then(data => {
-                    data.forEach(city => {
+                    hideLoadingIndicator();
+                    birthProvinceSelect.innerHTML = '<option value="">PROVINCE</option>'; // Clear previous options
+                    data.forEach(province => {
                         const option = document.createElement('option');
-                        option.value = city.name; // Set the value to the city name
-                        option.textContent = city.name; // Display the city name
-                        birthMunicipalitySelect.appendChild(option);
+                        option.value = province.name; // Set the value to the province name
+                        option.textContent = province.name; // Display the province name
+                        birthProvinceSelect.appendChild(option);
                     });
                 })
-                .catch(error => console.error('Error fetching cities:', error));
-        }
-    });
-});
+                .catch(error => {
+                    hideLoadingIndicator();
+                    console.error('Error fetching provinces:', error);
+                });
+
+            // Fetch municipalities when a province is selected
+            birthProvinceSelect.addEventListener('change', function() {
+                const selectedProvince = this.value;
+                birthMunicipalitySelect.innerHTML = '<option value="">CITY/MUNICIPALITY</option>'; // Clear previous options
+
+                if (selectedProvince) {
+                    // You may need to adjust this URL based on your actual API endpoint for cities
+                    const citiesUrl = `https://psgc.cloud/api/provinces/${selectedProvince}/cities-municipalities`;
+
+                    fetch(citiesUrl)
+                        .then(response => {
+                            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                            return response.json();
+                        })
+                        .then(data => {
+                            data.forEach(city => {
+                                const option = document.createElement('option');
+                                option.value = city.name; // Set the value to the city name
+                                option.textContent = city.name; // Display the city name
+                                birthMunicipalitySelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching cities:', error));
+                }
+            });
+        });
 
 </script>
 
+<script>
+// orders.php
 
-<!-- Edit Staff Modal -->
-<div class="modal fade" id="editStaffModal" tabindex="-1" aria-labelledby="editStaffModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-dark">
-                <h5 class="modal-title text-white" id="editStaffModalLabel">Edit Staff</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editStaffForm">
-                    <input type="hidden" id="staffId">
-                    <div class="mb-3">
-                        <label for="editFirstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="editFirstName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editLastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="editLastName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editMiddleName" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" id="editMiddleName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editStaffEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="editStaffEmail" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editStaffPhone" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="editStaffPhone" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editStaffStatus" class="form-label">Status</label>
-                        <select class="form-select" id="editStaffStatus" required>
-                            <option value="" disabled selected>Select status</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn bg-primary text-dark text-white" form="editStaffForm">Update Staff</button>
-            </div>
-        </div>
-    </div>
-</div>
+function confirmDelete(userId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to reject this user? This action cannot be undone.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, reject!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // AJAX request to reject_user.php
+            $.ajax({
+                url: 'reject_user.php', // Point to the correct PHP file
+                type: 'POST',
+                data: { user_id: userId }, // Send user ID for deletion
+                dataType: 'json',  // Expecting JSON in response
+                success: function(response) {
+                    console.log('Server Response:', response);  // Debugging
+                    if (response.success) {
+                        Swal.fire({
+                            title: 'Rejected!',
+                            text: 'The user has been rejected successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            location.reload();  // Reload to reflect changes
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: response.message || 'An unknown error occurred.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);  // Log errors
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'An error occurred while rejecting the user. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        }
+    });
+}
 
-<?php include 'modals.php'; ?>
+</script>
 <?php include 'components/script.php'; ?>
 
 

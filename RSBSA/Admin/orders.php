@@ -217,27 +217,7 @@
 												</tr>
 											</thead>
 											<tbody>
-											<?php
-												// Pagination logic for 'cancelled' tab
-												$result = $dbConnection->query("SELECT user_id, email, accountStatus, account_id FROM useraccounts WHERE accountStatus = 'cancelled' LIMIT $limit OFFSET $offset");
-												if ($result->num_rows > 0) {
-													while ($row = $result->fetch_assoc()) {
-														echo '<tr>';
-														
-														echo '<td class="cell"><span class="truncate">' . htmlspecialchars($row['account_id']) . '</span></td>';
-														echo '<td class="cell">' . htmlspecialchars($row['email']) . '</td>';
-														echo '<td class="cell"><span class="badge bg-danger">' . ucfirst(htmlspecialchars($row['accountStatus'])) . '</span></td>';
-														echo '<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>';
-														echo '</tr>';
-													}
-												} else {
-													echo '<tr><td colspan="7" class="text-center">No users found</td></tr>';
-												}
-
-												$totalResult = $dbConnection->query("SELECT COUNT(*) as total FROM useraccounts WHERE accountStatus = 'cancelled'");
-												$totalRecords = $totalResult->fetch_assoc()['total'];
-												$totalPages = ceil($totalRecords / $limit);
-											?>
+											<?php include '../includes/Applicants/nobenefits.php' ?>
 											</tbody>
 										</table>
 									</div><!--//table-responsive-->
@@ -283,6 +263,63 @@
 	    </div><!--//app-content-->
 	    
 	    <?php include 'components/footer.php' ?>
+		<script>
+// orders.php
+
+function confirmDelete(userId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to reject this user? This action cannot be undone.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, reject!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // AJAX request to reject_user.php
+            $.ajax({
+                url: 'reject_user.php', // Point to the correct PHP file
+                type: 'POST',
+                data: { user_id: userId }, // Send user ID for deletion
+                dataType: 'json',  // Expecting JSON in response
+                success: function(response) {
+                    console.log('Server Response:', response);  // Debugging
+                    if (response.success) {
+                        Swal.fire({
+                            title: 'Rejected!',
+                            text: 'The user has been rejected successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            location.reload();  // Reload to reflect changes
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: response.message || 'An unknown error occurred.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);  // Log errors
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'An error occurred while rejecting the user. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        }
+    });
+}
+
+</script>
+
 	    
     </div><!--//app-wrapper-->    					
 

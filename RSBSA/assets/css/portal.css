@@ -12466,12 +12466,14 @@ button.close:focus {
   }
 }
 .app-login .auth-background-holder {
-  background: url("../images/da_logo.png") no-repeat center
-    center;
-  background-size: cover;
+  background: url("../images/da_logo.png") no-repeat center center;
+  background-size: contain; /* Ensures the entire image is visible */
+  background-position: center; /* Centers the image */
   height: 100vh;
+  width: 100%; /* Ensures full-width coverage */
   min-height: 100%;
 }
+
 .app-signup .auth-background-holder {
   background: url("../images/background/") no-repeat center
     center;
@@ -12498,7 +12500,9 @@ button.close:focus {
   top: 0;
   z-index: 10;
   background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(90px); /* Add blur effect */
 }
+
 .auth-background-overlay {
   position: absolute;
   width: 100%;

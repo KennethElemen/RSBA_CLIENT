@@ -1,11 +1,11 @@
 <?php
-    // Pagination logic for 'Pending Orders Tab'
-    $limit_pending = 10;
-    $page_pending = isset($_GET['page_pending']) ? $_GET['page_pending'] : 1;
-    $offset_pending = ($page_pending - 1) * $limit_pending;
+    // Pagination logic for 'No Benefits Pending Orders Tab'
+    $limit_no_benefits = 10;
+    $page_no_benefits = isset($_GET['page_no_benefits']) ? $_GET['page_no_benefits'] : 1;
+    $offset_no_benefits = ($page_no_benefits - 1) * $limit_no_benefits;
 
-    // Updated query to filter by role = 'user'
-    $pending_query =  "SELECT 
+    // Query to get pending users with no benefits and role = 'user'
+    $no_benefits_query =  "SELECT 
         ua.user_id,     
         ua.email, 
         ua.accountStatus, 
@@ -26,7 +26,6 @@
         MAX(a.purok) AS purok, 
         MAX(c.crop_name) AS crop_name, 
         MAX(c.crop_area_hectares) AS crop_area_hectares, 
-        MAX(c.benefits) AS benefits, 
         MAX(c.reference) AS reference, 
         MAX(j.job_role) AS job_role, 
         MAX(co.phone_number) AS phone_number
@@ -43,40 +42,39 @@
     LEFT JOIN 
         contacts co ON ua.user_id = co.user_id
     WHERE 
-        ua.accountStatus = 'pending' 
-        AND ua.role = 'user' -- Added filter to select only 'user' roles
+        c.benefits = 'Pending'
+       
     GROUP BY 
         ua.user_id, ua.email, ua.accountStatus, ua.account_id, u.first_name, u.middle_name, u.sur_name, u.date_of_birth
-    LIMIT $limit_pending OFFSET $offset_pending"; 
+    LIMIT $limit_no_benefits OFFSET $offset_no_benefits"; 
 
-    $result_pending = $dbConnection->query($pending_query);
+    $result_no_benefits = $dbConnection->query($no_benefits_query);
 
-    if ($result_pending->num_rows > 0) {
-        while ($row_pending = $result_pending->fetch_assoc()) {
+    if ($result_no_benefits->num_rows > 0) {
+        while ($row_no_benefits = $result_no_benefits->fetch_assoc()) {
             // Check if fields are not null before using them
-            $user_id = htmlspecialchars($row_pending['user_id'] ?? '');
-            $email = htmlspecialchars($row_pending['email'] ?? '');
-            $full_name = htmlspecialchars($row_pending['first_name'] . ' ' . $row_pending['middle_name'] . ' ' . $row_pending['sur_name'] ?? '');
-            $account_status = htmlspecialchars($row_pending['accountStatus'] ?? '');
-            $phone_number = htmlspecialchars($row_pending['phone_number'] ?? '');
-            $date_of_birth = htmlspecialchars($row_pending['date_of_birth'] ?? '');
-            $sex = htmlspecialchars($row_pending['sex'] ?? '');
-            $birth_place = htmlspecialchars(($row_pending['birth_municipality'] ?? '') . ', ' . ($row_pending['birth_province'] ?? ''));
-            $region = htmlspecialchars($row_pending['region'] ?? '');
-            $province = htmlspecialchars($row_pending['province'] ?? '');
-            $city_municipality = htmlspecialchars($row_pending['city_municipality'] ?? '');
-            $barangay = htmlspecialchars($row_pending['barangay'] ?? '');
-            $street_number = htmlspecialchars($row_pending['street_number'] ?? '');
-            $purok = htmlspecialchars($row_pending['purok'] ?? '');
-            $crop_name = htmlspecialchars($row_pending['crop_name'] ?? '');
-            $crop_area = htmlspecialchars($row_pending['crop_area_hectares'] ?? '');
-            $benefits = htmlspecialchars($row_pending['benefits'] ?? '');
-            $reference = htmlspecialchars($row_pending['reference'] ?? '');
-            $job_role = htmlspecialchars($row_pending['job_role'] ?? '');
-            $profile_picture = htmlspecialchars($row_pending['profile_picture'] ?? '');
+            $user_id = htmlspecialchars($row_no_benefits['user_id'] ?? '');
+            $email = htmlspecialchars($row_no_benefits['email'] ?? '');
+            $full_name = htmlspecialchars($row_no_benefits['first_name'] . ' ' . $row_no_benefits['middle_name'] . ' ' . $row_no_benefits['sur_name'] ?? '');
+            $account_status = htmlspecialchars($row_no_benefits['accountStatus'] ?? '');
+            $phone_number = htmlspecialchars($row_no_benefits['phone_number'] ?? '');
+            $date_of_birth = htmlspecialchars($row_no_benefits['date_of_birth'] ?? '');
+            $sex = htmlspecialchars($row_no_benefits['sex'] ?? '');
+            $birth_place = htmlspecialchars(($row_no_benefits['birth_municipality'] ?? '') . ', ' . ($row_no_benefits['birth_province'] ?? ''));
+            $region = htmlspecialchars($row_no_benefits['region'] ?? '');
+            $province = htmlspecialchars($row_no_benefits['province'] ?? '');
+            $city_municipality = htmlspecialchars($row_no_benefits['city_municipality'] ?? '');
+            $barangay = htmlspecialchars($row_no_benefits['barangay'] ?? '');
+            $street_number = htmlspecialchars($row_no_benefits['street_number'] ?? '');
+            $purok = htmlspecialchars($row_no_benefits['purok'] ?? '');
+            $crop_name = htmlspecialchars($row_no_benefits['crop_name'] ?? '');
+            $crop_area = htmlspecialchars($row_no_benefits['crop_area_hectares'] ?? '');
+            $reference = htmlspecialchars($row_no_benefits['reference'] ?? '');
+            $job_role = htmlspecialchars($row_no_benefits['job_role'] ?? '');
+            $profile_picture = htmlspecialchars($row_no_benefits['profile_picture'] ?? '');
 
             echo '<tr>';
-            echo '<td class="cell"><span class="truncate">' . htmlspecialchars($row_pending['account_id']) . '</span></td>';
+            echo '<td class="cell"><span class="truncate">' . htmlspecialchars($row_no_benefits['account_id']) . '</span></td>';
             echo '<td class="cell">' . $email . '</td>';
             echo '<td class="cell">' . $full_name . '</td>';
             echo '<td class="cell"><span class="badge bg-warning">' . ucfirst($account_status) . '</span></td>';
@@ -102,7 +100,6 @@
                         data-purok="' . $purok . '" 
                         data-crop-name="' . $crop_name . '" 
                         data-crop-area="' . $crop_area . '" 
-                        data-benefits="' . $benefits . '" 
                         data-reference="' . $reference . '" 
                         data-job-role="' . $job_role . '"
                         data-profile-picture="' . $profile_picture . '">
@@ -112,7 +109,7 @@
 
             // Add the Reject button with confirmation
             echo '<td>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $row_pending['user_id'] . ')">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(' . $row_no_benefits['user_id'] . ')">
                         Reject
                     </button>
                 </td>';
@@ -120,11 +117,11 @@
             echo '</tr>';
         }
     } else {
-        echo '<tr><td colspan="6" class="text-center">No pending users found</td></tr>';
+        echo '<tr><td colspan="6" class="text-center">No pending users without benefits found</td></tr>';
     }
 
-    // Calculate total pages for 'pending' users in Pending Orders Tab
-    $totalResult_pending = $dbConnection->query("SELECT COUNT(*) as total FROM useraccounts WHERE accountStatus = 'pending' AND role = 'user'");
-    $totalRecords_pending = $totalResult_pending->fetch_assoc()['total'];
-    $totalPages_pending = ceil($totalRecords_pending / $limit_pending);
+    // Calculate total pages for 'no benefits' pending users in No Benefits Pending Orders Tab
+    $totalResult_no_benefits = $dbConnection->query("SELECT COUNT(*) as total FROM useraccounts ua LEFT JOIN Crops c ON ua.user_id = c.user_id WHERE ua.accountStatus = 'pending' AND ua.role = 'user' AND (c.benefits IS NULL OR c.benefits = '')");
+    $totalRecords_no_benefits = $totalResult_no_benefits->fetch_assoc()['total'];
+    $totalPages_no_benefits = ceil($totalRecords_no_benefits / $limit_no_benefits);
 ?>
