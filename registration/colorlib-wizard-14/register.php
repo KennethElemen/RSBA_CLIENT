@@ -174,7 +174,7 @@ $dbConnection->close();
     <meta name="author" content="colorlib.com" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Sign Up Form</title>
-
+    <link rel="shortcut icon" href="../assets/finallogo.jpg"> 
     <!-- Font Icon -->
     <link
       rel="stylesheet"

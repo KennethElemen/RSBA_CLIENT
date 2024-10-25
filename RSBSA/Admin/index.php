@@ -147,7 +147,6 @@
 						    </div><!--//app-card-header-->
 						    <div class="app-card-body px-4">
 							    
-							    <div class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquet eros vel diam semper mollis.</div>
 						    </div><!--//app-card-body-->
 						    <div class="app-card-footer p-4 mt-auto">
 								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#announcementModal">

@@ -13,7 +13,7 @@
     
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
-    <link rel="shortcut icon" href="../favicon.ico"> 
+    <link rel="shortcut icon" href="../assets/finallogo.jpg"> 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- FontAwesome JS-->
@@ -132,7 +132,7 @@ $dbConnection->close();
             <div class="app-auth-body mx-auto bg-white p-5 rounded shadow" style="width: 100%;">
                 <div class="app-auth-branding mb-4">
                     <a class="app-logo" href="index.html">
-                        <img class="logo-icon me-2" src="../assets/images/sane_logo.png" alt="logo">
+                        <img class="logo-icon me-2" src="../assets/finallogo.jpg" alt="logo">
                     </a>
                 </div>
                 <h2 class="auth-heading text-center mb-5">Log in to Portal</h2>

@@ -42,7 +42,7 @@ $conn->close();
     
     <meta name="description" content="Agriland">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
-    <link rel="shortcut icon" href="favicon.ico"> 
+    <link rel="shortcut icon" href="../assets/finallogo.jpg">  
   
 
     <!-- FontAwesome JS-->

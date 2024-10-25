@@ -4,33 +4,42 @@
 // Include the session checking function
 require_once('../includes/check_session.php');
 
-
 checkSession($conn, ['user']);
 
 // Fetch the user_id from the session
 $user_id = $_SESSION['user_id']; // Adjust according to your session variable
 
-// Prepare and execute the query to fetch the profile_picture
-$query = "SELECT profile_picture FROM users WHERE user_id = ?";
+// Prepare and execute the query to fetch first_name and profile_picture
+$query = "SELECT first_name, profile_picture FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Check if a result is returned
+// Initialize variables
+$first_name = '';
+$profile_picture = '../assets/images/default_user.png'; // Default image if no picture found
+
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    $first_name = $row['first_name'];
     $profile_picture = $row['profile_picture'];
-} else {
-    $profile_picture = '../assets/images/default_user.png'; // Default image if no picture found
+}
+$stmt->close();
+
+// Query to fetch the latest announcement
+$announcement_text = 'No announcements available.';
+$announcement_query = "SELECT content FROM announcements ORDER BY created_at DESC LIMIT 1"; // Assuming 'created_at' or similar timestamp column exists
+$announcement_result = $conn->query($announcement_query);
+
+if ($announcement_result->num_rows > 0) {
+    $announcement_row = $announcement_result->fetch_assoc();
+    $announcement_text = $announcement_row['content'];
 }
 
-// Close the statement and connection
-$stmt->close();
+// Close the connection
 $conn->close();
 ?>
-
-
 
     <title>Agriland</title>
     
@@ -42,7 +51,7 @@ $conn->close();
     
     <meta name="description" content="Agriland">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
-    <link rel="shortcut icon" href="favicon.ico"> 
+    <link rel="shortcut icon" href="../assets/finallogo.jpg"> 
   
 
     <!-- FontAwesome JS-->

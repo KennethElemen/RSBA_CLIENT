@@ -135,7 +135,7 @@
 									</div><!--//row-->
 								</div><!--//app-card-header-->
 								<div class="app-card-body px-4">
-									<div class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquet eros vel diam semper mollis.</div>
+									
 								</div><!--//app-card-body-->
 								<div class="app-card-footer p-4 mt-auto">
 									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#announcementModal">
@@ -181,29 +181,7 @@
 						</div><!--//col-->
 					</div><!--//row-->
 
-					<div class="modal fade" id="liveChatModal" tabindex="-1" aria-labelledby="liveChatModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered modal-lg">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="liveChatModalLabel">Live Chat Support</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<div class="d-flex flex-column chat-window h-100">
-										<div class="chat-messages flex-grow-1 overflow-auto p-3 bg-light" id="chat-messages">
-											<!-- Messages will be dynamically injected here -->
-										</div>
-										<!-- Chat input -->
-										<div class="input-group mt-3">
-											<input type="text" id="chatInput" class="form-control" placeholder="Type a message..." aria-label="Type a message...">
-											<button class="btn btn-primary" type="button" id="sendMessageBtn">Send</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
+					
 					
 
 			    
