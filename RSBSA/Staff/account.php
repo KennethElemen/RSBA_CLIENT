@@ -102,15 +102,8 @@
                 echo '<strong>Email:</strong> ' . $row['email'];
                 echo '</div><!--//item-->';
 
-                 // Role
-                echo '<div class="item border-bottom py-3">';
-                echo '<strong>ACCOUNT ROLE:</strong> ' . $row['role'];
-                echo '</div><!--//item-->';
-
-                // Phone Number
-                echo '<div class="item border-bottom py-3">';
-                echo '<strong>Phone Number:</strong> ' . $row['phone_number'];
-                echo '</div><!--//item-->';
+                
+                
 
                 // Account Status
                 echo '<div class="item border-bottom py-3">';
