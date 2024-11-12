@@ -405,7 +405,9 @@ $dbConnection->close();
                   id="dateOfBirth"
                   placeholder="DATE OF BIRTH"
                   required
+                  onchange="validateAge()"
                 />
+                <small id="ageError" style="color: red; display: none;">You must be at least 18 years old.</small>
               </div>
             </div>
             <hr />
@@ -549,29 +551,46 @@ $dbConnection->close();
             <hr>
             <h4>Farm Address</h4>
             <div class="form-row form-input-flex">
-              <div class="form-input">
-                <select name="region" id="step4_region" required>
-                  <option value="">REGION</option>
-                </select>
-              </div>
-              <div class="form-input">
-                <select name="province" id="step4_province" required>
-                  <option value="">PROVINCE</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row form-input-flex">
-              <div class="form-input">
-                <select name="city" id="step4_city" required>
-                  <option value="">CITY/MUNICIPALITY</option>
-                </select>
-              </div>
-              <div class="form-input">
-                <select name="barangay" id="step4_barangay" required>
-                  <option value="">BARANGAY</option>
-                </select>
-              </div>
-              
+            <div class="form-input">
+    <select name="region" id="step4_region" disabled required>
+        <option value="Region III (Central Luzon)" selected>Region III (Central Luzon)</option>
+    </select>
+</div>
+<div class="form-input">
+    <select name="province" id="step4_province" disabled required>
+        <option value="Nueva Ecija" selected>Nueva Ecija</option>
+    </select>
+</div>
+<div class="form-input">
+    <select name="city" id="step4_city" disabled required>
+        <option value="San Antonio" selected>San Antonio</option>
+    </select>
+</div>
+<div class="form-input">
+    <select name="barangay" id="step4_barangay" required>
+        <option value="">BARANGAY</option>
+        <option value="Buliran">Buliran</option>
+        <option value="Cama Juan">Cama Juan</option>
+        <option value="Julo">Julo</option>
+        <option value="Lawang Kupang">Lawang Kupang</option>
+        <option value="Luyos">Luyos</option>
+        <option value="Maugat">Maugat</option>
+        <option value="Panabingan">Panabingan</option>
+        <option value="Papaya">Papaya</option>
+        <option value="Poblacion">Poblacion</option>
+        <option value="San Francisco">San Francisco</option>
+        <option value="San Jose">San Jose</option>
+        <option value="San Mariano">San Mariano</option>
+        <option value="Santa Barbara">Santa Barbara</option>
+        <option value="Santa Cruz">Santa Cruz</option>
+        <option value="Santo Cristo">Santo Cristo</option>
+        <option value="Tikiw">Tikiw</option>
+    </select>
+</div>
+
+
+
+
             </div>
 
           
@@ -684,6 +703,29 @@ $dbConnection->close();
         }
       }
     </script>
+
+<script>
+  function validateAge() {
+    const dateOfBirthInput = document.getElementById("dateOfBirth");
+    const ageError = document.getElementById("ageError");
+    const dateOfBirth = new Date(dateOfBirthInput.value);
+    const today = new Date();
+    
+    const age = today.getFullYear() - dateOfBirth.getFullYear();
+    const monthDiff = today.getMonth() - dateOfBirth.getMonth();
+    const dayDiff = today.getDate() - dateOfBirth.getDate();
+
+    if (age > 18 || (age === 18 && monthDiff > 0) || (age === 18 && monthDiff === 0 && dayDiff >= 0)) {
+      ageError.style.display = "none";
+      dateOfBirthInput.setCustomValidity("");
+    } else {
+      ageError.style.display = "block";
+      dateOfBirthInput.setCustomValidity("You must be at least 18 years old.");
+    }
+  }
+</script>
+
+<!-- // Password Validation -->
  <script>
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirm_password");
@@ -756,6 +798,9 @@ $dbConnection->close();
       }
     };
   </script>
+
+
+    <!-- Eye Icon script -->
   <script>
   function togglePassword(inputId, iconId) {
     const inputField = document.getElementById(inputId);
@@ -772,6 +817,8 @@ $dbConnection->close();
   }
 </script>
 
+
+<!-- Birth Place Location -->
 <script>
         document.addEventListener("DOMContentLoaded", function () {
             const birthProvinceSelect = document.getElementById('birthProvince');
